@@ -1,0 +1,97 @@
+/**
+ * Ported from https://github.com/ellisonleao/gruvbox.nvim
+ */
+:root {
+  --gruvbox-dark-0-hard: #1d2021;
+  --gruvbox-dark-0: #282828;
+  --gruvbox-dark-0-soft: #32302f;
+  --gruvbox-dark-1: #3c3836;
+  --gruvbox-dark-2: #504945;
+  --gruvbox-dark-3: #665c54;
+  --gruvbox-dark-4: #7c6f64;
+  --gruvbox-light-0-hard: #f9f5d7;
+  --gruvbox-light-0: #fbf1c7;
+  --gruvbox-light-0-soft: #f2e5bc;
+  --gruvbox-light-1: #ebdbb2;
+  --gruvbox-light-2: #d5c4a1;
+  --gruvbox-light-3: #bdae93;
+  --gruvbox-light-4: #a89984;
+  --gruvbox-bright-red: #fb4934;
+  --gruvbox-bright-green: #b8bb26;
+  --gruvbox-bright-yellow: #fabd2f;
+  --gruvbox-bright-blue: #83a598;
+  --gruvbox-bright-purple: #d3869b;
+  --gruvbox-bright-aqua: #8ec07c;
+  --gruvbox-bright-orange: #fe8019;
+  --gruvbox-neutral-red: #cc241d;
+  --gruvbox-neutral-green: #98971a;
+  --gruvbox-neutral-yellow: #d79921;
+  --gruvbox-neutral-blue: #458588;
+  --gruvbox-neutral-purple: #b16286;
+  --gruvbox-neutral-aqua: #689d6a;
+  --gruvbox-neutral-orange: #d65d0e;
+  --gruvbox-faded-red: #9d0006;
+  --gruvbox-faded-green: #79740e;
+  --gruvbox-faded-yellow: #b57614;
+  --gruvbox-faded-blue: #076678;
+  --gruvbox-faded-purple: #8f3f71;
+  --gruvbox-faded-aqua: #427b58;
+  --gruvbox-faded-orange: #af3a03;
+  --gruvbox-gray: #928374;
+}
+
+:root {
+  --bg-0: var(--gruvbox-light-0);
+  --bg-1: var(--gruvbox-light-1);
+  --bg-2: var(--gruvbox-light-2);
+  --bg-3: var(--gruvbox-light-3);
+  --bg-4: var(--gruvbox-light-4);
+  --fg-0: var(--gruvbox-dark-0);
+  --fg-1: var(--gruvbox-dark-1);
+  --fg-2: var(--gruvbox-dark-2);
+  --fg-3: var(--gruvbox-dark-3);
+  --fg-4: var(--gruvbox-dark-4);
+  --red: var(--gruvbox-faded-red);
+  --green: var(--gruvbox-faded-green);
+  --yellow: var(--gruvbox-faded-yellow);
+  --blue: var(--gruvbox-faded-blue);
+  --purple: var(--gruvbox-faded-purple);
+  --aqua: var(--gruvbox-faded-aqua);
+  --orange: var(--gruvbox-faded-orange);
+  --neutral-red: var(--gruvbox-neutral-red);
+  --neutral-green: var(--gruvbox-neutral-green);
+  --neutral-yellow: var(--gruvbox-neutral-yellow);
+  --neutral-blue: var(--gruvbox-neutral-blue);
+  --neutral-purple: var(--gruvbox-neutral-purple);
+  --neutral-aqua: var(--gruvbox-neutral-aqua);
+  --gray: var(--gruvbox-gray);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-0: var(--gruvbox-dark-0);
+    --bg-1: var(--gruvbox-dark-1);
+    --bg-2: var(--gruvbox-dark-2);
+    --bg-3: var(--gruvbox-dark-3);
+    --bg-4: var(--gruvbox-dark-4);
+    --fg-0: var(--gruvbox-light-0);
+    --fg-1: var(--gruvbox-light-1);
+    --fg-2: var(--gruvbox-light-2);
+    --fg-3: var(--gruvbox-light-3);
+    --fg-4: var(--gruvbox-light-4);
+    --red: var(--gruvbox-bright-red);
+    --green: var(--gruvbox-bright-green);
+    --yellow: var(--gruvbox-bright-yellow);
+    --blue: var(--gruvbox-bright-blue);
+    --purple: var(--gruvbox-bright-purple);
+    --aqua: var(--gruvbox-bright-aqua);
+    --orange: var(--gruvbox-bright-orange);
+    --neutral-red: var(--gruvbox-neutral-red);
+    --neutral-green: var(--gruvbox-neutral-green);
+    --neutral-yellow: var(--gruvbox-neutral-yellow);
+    --neutral-blue: var(--gruvbox-neutral-blue);
+    --neutral-purple: var(--gruvbox-neutral-purple);
+    --neutral-aqua: var(--gruvbox-neutral-aqua);
+    --gray: var(--gruvbox-gray);
+  }
+}
