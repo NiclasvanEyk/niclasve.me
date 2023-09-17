@@ -4,8 +4,11 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import { article } from '../links';
 
-type Props = CollectionEntry<'blog'>['data'];
+type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
+
+type Props = PartialBy<CollectionEntry<'blog'>['data'], 'pubDate'>;
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
@@ -13,6 +16,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
+
 		<style>
 			main {
 				width: calc(100% - 2em);
@@ -25,6 +29,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			.hero-image img {
 				display: block;
 				margin: 0 auto;
+        margin-top: 3em;
 				border-radius: 12px;
 				box-shadow: var(--box-shadow);
 			}
@@ -55,7 +60,8 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 	</head>
 
 	<body>
-		<Header />
+		<Header page={{ href: article(''), text: "Writing" }} />
+
 		<main>
 			<article>
 				<div class="hero-image">
@@ -64,7 +70,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				<div class="prose">
 					<div class="title">
 						<div class="date">
-							<FormattedDate date={pubDate} />
+              { pubDate && ( <FormattedDate date={pubDate} />) }
 							{
 								updatedDate && (
 									<div class="last-updated-on">
@@ -76,6 +82,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 						<h1>{title}</h1>
 						<hr />
 					</div>
+
 					<slot />
 				</div>
 			</article>

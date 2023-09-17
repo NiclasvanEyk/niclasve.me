@@ -1,0 +1,10 @@
+---
+type Props = { word: string };
+const { word } = Astro.props;
+---
+
+<>
+  {word.split('').map(letter => <span>{letter}</span>)}
+</>
+
+

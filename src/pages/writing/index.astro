@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
+import { article } from '../../links';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
@@ -27,6 +28,10 @@ const posts = (await getCollection('blog')).sort(
 				margin: 0;
 				padding: 0;
 			}
+
+      img {
+        max-width: 100%;
+      }
 			ul li {
 				width: calc(50% - 1rem);
 			}
@@ -34,6 +39,7 @@ const posts = (await getCollection('blog')).sort(
 				text-decoration: none;
 				transition: 0.2s ease;
 			}
+
 			ul li:first-child {
 				width: 100%;
 				margin-bottom: 1rem;
@@ -45,6 +51,7 @@ const posts = (await getCollection('blog')).sort(
 			ul li:first-child .title {
 				font-size: 2.369rem;
 			}
+
 			ul li img {
 				margin-bottom: 0.5rem;
 				border-radius: 12px;
@@ -54,12 +61,12 @@ const posts = (await getCollection('blog')).sort(
 			}
 			.title {
 				margin: 0;
-				color: rgb(var(--black));
+				color: var(--fg-0);
 				line-height: 1;
 			}
 			.date {
 				margin: 0;
-				color: rgb(var(--gray));
+				color: var(--fg-4);
 			}
 			ul li a:hover h4,
 			ul li a:hover .date {
@@ -86,15 +93,16 @@ const posts = (await getCollection('blog')).sort(
 		</style>
 	</head>
 	<body>
-		<Header />
+		<Header page={{ href: article(''), text: "Writing" }} />
 		<main>
 			<section>
 				<ul>
 					{
 						posts.map((post) => (
 							<li>
-								<a href={`/blog/${post.slug}/`}>
+								<a href={article(post.slug)} class="article-link">
 									<img width={720} height={360} src={post.data.heroImage} alt="" />
+
 									<h4 class="title">{post.data.title}</h4>
 									<p class="date">
 										<FormattedDate date={post.data.pubDate} />

@@ -13,6 +13,8 @@
     "@astrojs/mdx": "^1.0.3",
     "@astrojs/rss": "^3.0.0",
     "@astrojs/sitemap": "^3.0.0",
+    "@fontsource-variable/fira-code": "^5.0.8",
+    "@fontsource-variable/inter": "^5.0.8",
     "astro": "^3.0.12",
     "astrojs-service-worker": "^1.1.0",
     "markdown-it": "^13.0.1",

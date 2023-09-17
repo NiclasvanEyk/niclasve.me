@@ -1,0 +1,28 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header page={{ href: "uses", text: "Uses" }} />
+		<main>
+			<h1>Tools, Software and Everything Else</h1>
+
+      <h2>Software</h2>
+
+      <h3>Applications</h3>
+
+      <h3>Command Line Tools</h3>
+
+      <h2>Hardware</h2>
+		</main>
+		<Footer />
+	</body>
+</html>

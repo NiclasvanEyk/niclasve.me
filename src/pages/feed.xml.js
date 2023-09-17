@@ -15,8 +15,8 @@ export async function GET(context) {
     site: context.site,
     items: posts.map((post) => ({
       ...post.data,
-      link: `/blog/${post.slug}/`,
-      conent: sanitizeHtml(parser.render(post.body)),
+      link: `/words/${post.slug}/`,
+      content: sanitizeHtml(parser.render(post.body)),
     })),
     // TODO: Maybe add a specific stylesheet for RSS
   });

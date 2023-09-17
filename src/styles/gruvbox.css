@@ -65,15 +65,18 @@
   --neutral-purple: var(--gruvbox-neutral-purple);
   --neutral-aqua: var(--gruvbox-neutral-aqua);
   --gray: var(--gruvbox-gray);
+
+  --header-bg: var(--gruvbox-light-1);
+  --body-bg: var(--gruvbox-light-0);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-0: var(--gruvbox-dark-0);
-    --bg-1: var(--gruvbox-dark-1);
+    --bg-0: var(--gruvbox-dark-4);
+    --bg-1: var(--gruvbox-dark-3);
     --bg-2: var(--gruvbox-dark-2);
-    --bg-3: var(--gruvbox-dark-3);
-    --bg-4: var(--gruvbox-dark-4);
+    --bg-3: var(--gruvbox-dark-1);
+    --bg-4: var(--gruvbox-dark-0);
     --fg-0: var(--gruvbox-light-0);
     --fg-1: var(--gruvbox-light-1);
     --fg-2: var(--gruvbox-light-2);
@@ -93,5 +96,8 @@
     --neutral-purple: var(--gruvbox-neutral-purple);
     --neutral-aqua: var(--gruvbox-neutral-aqua);
     --gray: var(--gruvbox-gray);
+
+    --header-bg: var(--gruvbox-dark-0);
+    --body-bg: var(--gruvbox-dark-1);
   }
 }
