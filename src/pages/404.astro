@@ -1,0 +1,50 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION } from '../consts';
+import LetterRainbow from '../components/LetterRainbow.astro';
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title="Not Found" description={SITE_DESCRIPTION} />
+	</head>
+
+	<body>
+		<Header />
+
+		<main>
+			<h1 class="hello rainbow tracking-tighter">
+        <LetterRainbow word="Not Found" />
+      </h1>
+      <p>
+        The site you wanted to visit does not exist here.
+        Maybe a link you clicked got truncated, or there was a typo?
+      </p>
+		</main>
+	</body>
+</html>
+
+<style>
+.hello {
+  color: black;
+  font-size: 80px;
+  line-height: 0.9em;
+  text-indent: -0.03em; 
+  margin-bottom: 1rem;
+  margin-top: 10px;
+  font-weight: 840;
+}
+
+html, body {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  .hello {
+    color: var(--fg-0);
+  }
+}
+</style>

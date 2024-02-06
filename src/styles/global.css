@@ -4,11 +4,20 @@
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
 
-@import "@fontsource-variable/inter";
-@import "@fontsource-variable/fira-code";
-
 @import "./gruvbox.css";
 @import "./prose.css";
+
+:root {
+  font-family: Inter, sans-serif;
+  font-feature-settings: 'liga' 1, 'calt' 1;
+  /* fix for Chrome */
+}
+
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: InterVariable, sans-serif;
+  }
+}
 
 :root {
   --site-container-width: 720px;
@@ -36,18 +45,15 @@ body {
   color: var(--fg-1);
   line-height: 1.7;
 }
+
 main {
   width: 720px;
   max-width: calc(100% - 2em);
-  margin: auto;
-  padding: 0 1em;
 }
+
 @media (max-width: 720px) {
   body {
     font-size: 18px;
-  }
-  main {
-    padding: 1em;
   }
 }
 
@@ -56,27 +62,27 @@ hr {
 }
 
 .rainbow {
-  & > :nth-child(1n):hover {
+  &> :nth-child(1n):hover {
     color: var(--red);
   }
 
-  & > :nth-child(2n):hover {
+  &> :nth-child(2n):hover {
     color: var(--green);
   }
 
-  & > :nth-child(3n):hover {
+  &> :nth-child(3n):hover {
     color: var(--yellow);
   }
 
-  & > :nth-child(4n):hover {
+  &> :nth-child(4n):hover {
     color: var(--blue);
   }
 
-  & > :nth-child(5n):hover {
+  &> :nth-child(5n):hover {
     color: var(--purple);
   }
 
-  & > :nth-child(6):hover {
+  &> :nth-child(6):hover {
     color: var(--aqua);
   }
 }

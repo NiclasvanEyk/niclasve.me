@@ -1,9 +1,18 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import LetterRainbow from '../components/LetterRainbow.astro';
+import BaseHead from '@/components/BaseHead.astro';
+import Section from '@/components/Homepage/Section.astro';
+import Header from '@/components/Header.astro';
+import BlogPost from '@/components/Homepage/BlogPost.astro';
+import SiteContainer from '@/components/SiteContainer.astro';
+
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getCollection, getEntry } from 'astro:content';
+
+const latestBlogPosts = (await getCollection("blog")).slice(0, 3);
+const selectedProjects = [
+  (await getEntry("projects", "chers"))!,
+  (await getEntry("projects", "keepac"))!,
+];
 ---
 
 <!doctype html>
@@ -11,42 +20,41 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-	<body>
+	<body class="bg-black text-zinc-200">
 		<Header />
-		<main>
-			<h1 class="hello rainbow">
-        <LetterRainbow word="Hello." />
-      </h1>
-			<p>This site is currently under construction 👷.</p>
-		</main>
+
+    <SiteContainer>
+      <main class="space-y-24 bg-black">
+        <Section heading="Welcome" class="mt-24">
+          <p>
+            My name is Niclas and this is my website.
+          </p>
+        </Section>
+
+        <Section heading="Blog">
+          <p>The latest and greatest. Mostly technical.</p>
+
+          <ol class="mt-4 space-y-2">
+            {latestBlogPosts.map(post => <BlogPost post={post} />)}
+          </ol>
+        </Section>
+
+        <Section heading="Projects" class="pb-6">
+          <p>A list of projects that I want to higlight.</p>
+
+          <ul class="mt-4 gap-2 grid grid-cols-2 auto-rows-fr -mx-4">
+            {selectedProjects.map(project => <li>
+              <a href={"TODO"} class="block min-h-full p-4 rounded hover:bg-zinc-900 transition-colors">
+                <header>
+                  <h4 class="font-bold">{project.data.title}</h4>
+                </header>
+
+                <p class="opacity-75">{project.data.description}</p>
+              </a>
+            </li>)}
+          </ul>
+        </Section>
+      </main>
+    </SiteContainer>
 	</body>
 </html>
-
-<style>
-.hello {
-  color: black;
-  font-size: 80px;
-  letter-spacing: -0.035em; 
-  line-height: 0.9em;
-  text-indent: -0.03em; 
-  margin-bottom: 1rem;
-  margin-top: 10px;
-  font-weight: 840;
-}
-
-html, body {
-  height: 100dvh;
-  display: flex;
-  flex-direction: column;
-}
-
-main {
-
-}
-
-@media screen and (prefers-color-scheme: dark) {
-  .hello {
-    color: var(--fg-0);
-  }
-}
-</style>

@@ -1,8 +1,6 @@
 ---
-import HeaderLink from "./HeaderLink.astro";
 import LetterRainbow from "./LetterRainbow.astro";
 import { SITE_TITLE } from '../consts';
-import { article } from "../links";
 
 interface Props {
 	page?: {
@@ -14,9 +12,9 @@ interface Props {
 const { page } = Astro.props;
 ---
 
-<header class="top-navigation-container">
-  <nav class="top-navigation">
-    <a href="/" class="site-name rainbow">
+<header class="flex flex-row place-content-center">
+  <nav class="flex items-center justify-between w-full max-w-3xl">
+    <a href="/" class="px-6 py-4 text-zinc-100/60 hover:text-zinc-100 transition-colors rainbow">
       <LetterRainbow word={SITE_TITLE} />
     </a>
 
@@ -24,47 +22,16 @@ const { page } = Astro.props;
       <span class="divider">/</span>
       <a href={page.href} class="sub-site">{page.text}</a>
     </span> }
-
-    <div class="spacer"></div>
-
-    <div class="internal-links">
-      <!-- <HeaderLink href={article("")}>Blog</HeaderLink> -->
-      <!-- <HeaderLink href="/about">About</HeaderLink> -->
-    </div>
   </nav>
 </header>
 <style>
-  header {
-    margin: 0;
-    padding: 0 1em;
-  }
-
-  .top-navigation-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .top-navigation {
-    width: 100%;
-    max-width: var(--site-container-width);
-  }
-
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  nav a {
-    padding: 1em 0.5em;
-    color: var(--fg-4);
-
-    &:hover {
-      color: var(--fg-0);
-    }
-  }
+  /* nav a { */
+  /*   color: var(--fg-4); */
+  /**/
+  /*   &:hover { */
+  /*     color: var(--fg-0); */
+  /*   } */
+  /* } */
 
   .divider {
     color: var(--fg-4);
@@ -73,10 +40,10 @@ const { page } = Astro.props;
     cursor: normal;
   }
 
-  nav a.site-name {
-    margin-inline: 0;
-    padding-inline: 0;
-  }
+  /* nav a.site-name { */
+  /*   margin-inline: 0; */
+  /*   padding-inline: 0; */
+  /* } */
 
   .site-name,
   .sub-site {

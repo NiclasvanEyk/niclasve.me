@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from '@/components/FormattedDate.astro';
+
+type Props = {
+  post: CollectionEntry<'blog'>
+}
+
+const { post } = Astro.props;
+---
+<li class="block -mx-4 p-4 rounded hover:bg-zinc-900 transition-colors">
+  <header>
+    <a href={"TODO"} class="hover:underline">
+      <h4 class="font-bold">{post.data.title}</h4>
+    </a>
+    <span class="opacity-75">
+      <FormattedDate date={post.data.pubDate} />
+    </span>
+    <span class="opacity-75 text-sm align-text-top mx-2 select-none">/</span>
+    <span class="opacity-75">X minutes read</span>
+  </header>
+
+  { post.data.description 
+    ? <p class="mt-2 opacity-75">{post.data.description}</p>
+    : null
+  }
+</li>
