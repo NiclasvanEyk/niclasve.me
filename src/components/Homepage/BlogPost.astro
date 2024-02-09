@@ -1,27 +1,35 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import FormattedDate from '@/components/FormattedDate.astro';
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "@/components/FormattedDate.astro";
+import { article } from "@/links";
 
 type Props = {
-  post: CollectionEntry<'blog'>
-}
+  post: CollectionEntry<"blog">;
+};
 
 const { post } = Astro.props;
 ---
-<li class="block -mx-4 p-4 rounded hover:bg-zinc-900 transition-colors">
+
+<li
+  class="-mx-4 block rounded p-4 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900"
+>
   <header>
-    <a href={"TODO"} class="hover:underline">
+    <a href={article(post.slug)} class="hover:underline">
       <h4 class="font-bold">{post.data.title}</h4>
     </a>
-    <span class="opacity-75">
+    <span class="cursor-default opacity-75">
       <FormattedDate date={post.data.pubDate} />
     </span>
-    <span class="opacity-75 text-sm align-text-top mx-2 select-none">/</span>
-    <span class="opacity-75">X minutes read</span>
+    <span
+      class="mx-2 cursor-default select-none align-text-top text-sm opacity-75"
+      >/</span
+    >
+    <span class="cursor-default opacity-75">X minutes read</span>
   </header>
 
-  { post.data.description 
-    ? <p class="mt-2 opacity-75">{post.data.description}</p>
-    : null
+  {
+    post.data.description ? (
+      <p class="mt-2 cursor-default opacity-75">{post.data.description}</p>
+    ) : null
   }
 </li>

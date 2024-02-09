@@ -5,15 +5,19 @@ import sitemap from "@astrojs/sitemap";
 import vercel from "@astrojs/vercel/serverless";
 import tailwind from "@astrojs/tailwind";
 import { rehypeHeadingIds } from '@astrojs/markdown-remark';
-import autolinkHeadings from 'rehype-autolink-headings'
+import autolinkHeadings from 'rehype-autolink-headings';
+
+import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://niclasve.me",
-  integrations: [mdx(), sitemap(), serviceWorker(), tailwind()],
+  integrations: [mdx(), sitemap(), serviceWorker(), tailwind(), react()],
   output: "server",
   markdown: {
-    rehypePlugins: [rehypeHeadingIds, [autolinkHeadings, { behavior: 'wrap' }]],
+    rehypePlugins: [rehypeHeadingIds, [autolinkHeadings, {
+      behavior: 'wrap'
+    }]]
   },
   adapter: vercel({
     webAnalytics: {

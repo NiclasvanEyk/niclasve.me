@@ -1,9 +1,8 @@
 ---
-import LetterRainbow from "./LetterRainbow.astro";
-import { SITE_TITLE } from '../consts';
+import { SITE_TITLE } from "../consts";
 
 interface Props {
-	page?: {
+  page?: {
     href: string;
     text: string;
   };
@@ -13,37 +12,33 @@ const { page } = Astro.props;
 ---
 
 <header class="flex flex-row place-content-center">
-  <nav class="flex items-center justify-between w-full max-w-3xl">
-    <a href="/" class="px-6 py-4 text-zinc-100/60 hover:text-zinc-100 transition-colors rainbow">
-      <LetterRainbow word={SITE_TITLE} />
+  <nav class="flex w-full max-w-3xl items-center justify-between">
+    <a
+      href="/"
+      class="px-6 py-4 tracking-tight text-zinc-900/80 dark:text-zinc-100/40"
+    >
+      {SITE_TITLE}
     </a>
 
-    { typeof page !== 'object' ? null : <>
-      <span class="divider">/</span>
-      <a href={page.href} class="sub-site">{page.text}</a>
-    </span> }
+    {
+      typeof page !== "object" ? null : (
+        <>
+          <span class="divider">/</span>
+          <a href={page.href} class="sub-site">
+            {page.text}
+          </a>
+        </>
+      )
+    }
   </nav>
 </header>
 <style>
-  /* nav a { */
-  /*   color: var(--fg-4); */
-  /**/
-  /*   &:hover { */
-  /*     color: var(--fg-0); */
-  /*   } */
-  /* } */
-
   .divider {
     color: var(--fg-4);
     margin-inline: 0.5ch;
     user-select: none;
     cursor: normal;
   }
-
-  /* nav a.site-name { */
-  /*   margin-inline: 0; */
-  /*   padding-inline: 0; */
-  /* } */
 
   .site-name,
   .sub-site {
