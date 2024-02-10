@@ -14,7 +14,7 @@ export function HoverableText({ text, children, width, padding }: Props) {
 
   return <HoverCard.Root openDelay={0.25}>
     <HoverCard.Trigger asChild>
-      <a className="underline">{text}</a>
+      <a className="underline cursor-help">{text}</a>
     </HoverCard.Trigger>
 
     <HoverCard.Portal>

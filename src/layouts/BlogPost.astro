@@ -4,6 +4,7 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
+import SiteContainer from "../components/SiteContainer.astro";
 import { article } from "../links";
 
 type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
@@ -21,35 +22,37 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
   <body class="bg-white text-zinc-900 dark:bg-black dark:text-zinc-200">
     <Header page={{ href: article(""), text: "Blog" }} />
 
-    <main>
-      <article>
-        <div class="hero-image">
-          {
-            heroImage && (
-              <img width={1020} height={510} src={heroImage} alt="" />
-            )
-          }
-        </div>
-        <div class="prose dark:prose-invert lg:prose-xl">
-          <div class="title mb-16">
-            <h1 class="!mb-3">{title}</h1>
-
-            <div class="date text-sm">
-              {pubDate && <FormattedDate date={pubDate} />}
-              {
-                updatedDate && (
-                  <div class="last-updated-on">
-                    Last updated on <FormattedDate date={updatedDate} />
-                  </div>
-                )
-              }
-            </div>
+    <SiteContainer>
+      <main>
+        <article>
+          <div class="hero-image">
+            {
+              heroImage && (
+                <img width={1020} height={510} src={heroImage} alt="" />
+              )
+            }
           </div>
+          <div class="prose dark:prose-invert lg:prose-xl">
+            <div class="title mb-16">
+              <h1 class="!mb-3">{title}</h1>
 
-          <slot />
-        </div>
-      </article>
-    </main>
+              <div class="date text-sm">
+                {pubDate && <FormattedDate date={pubDate} />}
+                {
+                  updatedDate && (
+                    <div class="last-updated-on">
+                      Last updated on <FormattedDate date={updatedDate} />
+                    </div>
+                  )
+                }
+              </div>
+            </div>
+
+            <slot />
+          </div>
+        </article>
+      </main>
+    </SiteContainer>
     <Footer />
   </body>
 </html>

@@ -1,0 +1,29 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import Default from "@/layouts/Default.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: project,
+  }));
+}
+
+type Props = CollectionEntry<"projects">;
+const { slug } = Astro.params;
+
+const projects = await getCollection("projects");
+const project = projects.find((page) => page.slug === slug);
+if (!project) return Astro.redirect("/404");
+
+const { Content } = await project.render();
+---
+
+<Default>
+  <main>
+    <h1 class="p-3 text-2xl font-extrabold">{project.data.title}</h1>
+
+    <Content />
+  </main>
+</Default>

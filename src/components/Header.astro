@@ -12,10 +12,10 @@ const { page } = Astro.props;
 ---
 
 <header class="flex flex-row place-content-center">
-  <nav class="flex w-full max-w-3xl items-center justify-between">
+  <nav class="flex w-full max-w-3xl items-center">
     <a
       href="/"
-      class="px-6 py-4 tracking-tight text-zinc-900/80 dark:text-zinc-100/40"
+      class="py-3 pl-3 tracking-tight text-zinc-900/80 dark:text-zinc-100/40"
     >
       {SITE_TITLE}
     </a>
@@ -23,7 +23,7 @@ const { page } = Astro.props;
     {
       typeof page !== "object" ? null : (
         <>
-          <span class="divider">/</span>
+          <span class="divider mx-1">/</span>
           <a href={page.href} class="sub-site">
             {page.text}
           </a>
@@ -32,24 +32,3 @@ const { page } = Astro.props;
     }
   </nav>
 </header>
-<style>
-  .divider {
-    color: var(--fg-4);
-    margin-inline: 0.5ch;
-    user-select: none;
-    cursor: normal;
-  }
-
-  .site-name,
-  .sub-site {
-    text-decoration: none;
-  }
-
-  nav .sub-site {
-    padding-left: 0 !important;
-  }
-
-  .spacer {
-    flex: 1;
-  }
-</style>

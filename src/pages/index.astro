@@ -1,14 +1,12 @@
 ---
-import BaseHead from "@/components/BaseHead.astro";
 import Section from "@/components/Homepage/Section.astro";
-import Header from "@/components/Header.astro";
 import BlogPost from "@/components/Homepage/BlogPost.astro";
-import SiteContainer from "@/components/SiteContainer.astro";
+import Default from "@/layouts/Default.astro";
 import { Location } from "@/components/Homepage/HoverCards/Location";
 import { Employer } from "@/components/Homepage/HoverCards/Employer";
 
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection, getEntry } from "astro:content";
+import { project as projectPage } from "@/links";
 
 const latestBlogPosts = (await getCollection("blog")).slice(0, 3);
 const selectedProjects = [
@@ -17,53 +15,46 @@ const selectedProjects = [
 ];
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <body class="bg-white text-zinc-900 dark:bg-black dark:text-zinc-200">
-    <Header />
+<Default>
+  <main class="space-y-24">
+    <Section heading="Welcome" class="mt-24">
+      <p>
+        My name is Niclas. I live in
+        <Location client:load />
+        and work for
+        <Employer client:load /> as a developer on the data team. This is my personal
+        website, where I write, experiment, and document.
+      </p>
+    </Section>
 
-    <SiteContainer>
-      <main class="space-y-24">
-        <Section heading="Welcome" class="mt-24">
-          <p>
-            My name is Niclas. I live in
-            <Location client:load />
-            and work for
-            <Employer client:load /> as a developer on the data team. This is my
-            personal website, where I write, experiment, and document.
-          </p>
-        </Section>
+    <Section heading="Blog">
+      <p>The latest and greatest. Mostly technical.</p>
 
-        <Section heading="Blog">
-          <p>The latest and greatest. Mostly technical.</p>
+      <ol class="mt-4 space-y-2">
+        {latestBlogPosts.map((post) => <BlogPost post={post} />)}
+      </ol>
+    </Section>
 
-          <ol class="mt-4 space-y-2">
-            {latestBlogPosts.map((post) => <BlogPost post={post} />)}
-          </ol>
-        </Section>
+    <Section heading="Projects" class="pb-6">
+      <p>A list of projects that I want to higlight.</p>
 
-        <Section heading="Projects" class="pb-6">
-          <p>A list of projects that I want to higlight.</p>
-
-          <ul class="-mx-4 mt-4 grid auto-rows-fr grid-cols-2 gap-2">
-            {
-              selectedProjects.map((project) => (
-                <li class="block min-h-full rounded p-4 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900">
-                  <a href={"TODO"} class="font-bold hover:underline">
-                    <h4>{project.data.title}</h4>
-                  </a>
-                  <p class="cursor-default opacity-75">
-                    {project.data.description}
-                  </p>
-                </li>
-              ))
-            }
-          </ul>
-        </Section>
-      </main>
-    </SiteContainer>
-  </body>
-</html>
+      <ul class="-mx-4 mt-4 grid auto-rows-fr grid-cols-2 gap-2">
+        {
+          selectedProjects.map((project) => (
+            <li class="block min-h-full rounded p-4 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900">
+              <a
+                href={projectPage(project.slug)}
+                class="font-bold hover:underline"
+              >
+                <h4>{project.data.title}</h4>
+              </a>
+              <p class="cursor-default opacity-75">
+                {project.data.description}
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </Section>
+  </main>
+</Default>

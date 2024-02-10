@@ -1,30 +1,35 @@
 ---
-import BaseHead from '@/components/BaseHead.astro';
-import Header from '@/components/Header.astro';
-import Footer from '@/components/Footer.astro';
-import SiteContainer from '@/components/SiteContainer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
-import { getCollection } from 'astro:content';
+import Default from "@/layouts/Default.astro";
+import { project as projectPage } from "@/links";
+import { format } from "date-fns";
+import { getCollection } from "astro:content";
 
-const projects = (await getCollection('projects')).sort(
-	(a, b) => a.data.startedAt.getTime() - b.data.startedAt.getTime()
+const projects = (await getCollection("projects")).sort(
+  (a, b) => b.data.startedAt.valueOf() - a.data.startedAt.valueOf(),
 );
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={`Projects - ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header page={{ href: "/projects", text: "Projects" }} />
-		<main>
-      <SiteContainer>
-        <ol>
-          { projects.map(project => <li>{ project.data.title }</li>) }
-        </ol>
-      </SiteContainer>
-		</main>
-		<Footer />
-	</body>
-</html>
+<Default>
+  <main>
+    <h1 class="p-3 text-2xl font-extrabold">Projects</h1>
+
+    <table>
+      <tbody>
+        {
+          projects.map((project) => (
+            <tr>
+              <td class="px-3 tabular-nums opacity-50">
+                {format(project.data.startedAt, "Y-MM-dd")}
+              </td>
+              <td class="px-3">
+                <a href={projectPage(project.slug)} class="hover:underline">
+                  {project.data.title}
+                </a>
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </main>
+</Default>
