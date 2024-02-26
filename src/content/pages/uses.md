@@ -27,7 +27,7 @@ Since not all functionality is freely available, you most likely need to pay for
 [Neovim](https://neovim.io) makes writing code fun and effective.
 [LazyVim](https://www.lazyvim.org) acts as a counter measure to keep me from configuring my editor setup for hours instead of actually getting things done.
 
-To summarize
+To summarize:
 - VS Code for new stuff and small edits
 - IntelliJ derivative my day-to-day work
 - Neovim for the joy of it
@@ -40,12 +40,11 @@ Linux
 
 ### Applications
 
-- [WezTerm](https://wezfurlong.org/wezterm) is my terminal of choice
+- [Kitty](https://sw.kovidgoyal.net/kitty) is my terminal of choice
 - [Raycast](https://www.raycast.com)
 
 ### Command Line Tools
 
-- [starship](https://starship.rs) for a simple prompt that works across shells, looks good, and tasteful defaults
 - [`fzf`](https://github.com/junegunn/fzf) mostly for it's great <kbd>ctrl+r</kbd> and <kbd>ctrl+t</kbd> replacements
 - [zoxide](https://github.com/ajeetdsouza/zoxide) (almost) always finds the right directory to `cd` into, without the hassle of navigating multiple folders and levels of `../../`
 - [`keepac`](https://github.com/NiclasvanEyk/keepac) helps me keeping a proper changelog by making the process as simple as `git commit`
@@ -57,13 +56,3 @@ Linux
 - [Photopea](https://www.photopea.com) and [Vectorpea](https://www.vectorpea.com) as free and web-based Photoshop and Illustrator alternatives
 - [tldraw](https://www.tldraw.com) for conveying ideas visually and collaborative brainstorming
 
-### Libraries
-
-- Laravel
-- Filament
-
-## Hardware
-
-- Macbook Pro (the one with an Intel processor, really great timing)
-- Ikea stand desk
-- cube
