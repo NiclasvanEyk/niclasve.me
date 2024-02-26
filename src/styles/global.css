@@ -6,6 +6,10 @@
   /* fix for Chrome */
 }
 
+.expressive-code .frame {
+  box-shadow: unset !important;
+}
+
 @supports (font-variation-settings: normal) {
   :root {
     font-family: InterVariable, sans-serif;
