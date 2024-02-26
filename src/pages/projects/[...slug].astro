@@ -22,8 +22,10 @@ const { Content } = await project.render();
 
 <Default>
   <main>
-    <h1 class="p-3 text-2xl font-extrabold">{project.data.title}</h1>
+    <article class="prose dark:prose-invert">
+      <h1 class="p-3 text-2xl font-extrabold">{project.data.title}</h1>
 
-    <Content />
+      <Content />
+    </article>
   </main>
 </Default>
