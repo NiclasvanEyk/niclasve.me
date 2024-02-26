@@ -8,6 +8,7 @@ type Props = {
 };
 
 const { post } = Astro.props;
+const { pubDate, description } = post.data;
 ---
 
 <li
@@ -18,7 +19,7 @@ const { post } = Astro.props;
       <h4 class="font-bold">{post.data.title}</h4>
     </a>
     <span class="cursor-default opacity-75">
-      <FormattedDate date={post.data.pubDate} />
+      {pubDate ? <FormattedDate date={pubDate} /> : "DRAFT"}
     </span>
     <span
       class="mx-2 cursor-default select-none align-text-top text-sm opacity-75"
@@ -28,8 +29,8 @@ const { post } = Astro.props;
   </header>
 
   {
-    post.data.description ? (
-      <p class="mt-2 cursor-default opacity-75">{post.data.description}</p>
+    description ? (
+      <p class="mt-2 cursor-default opacity-75">{description}</p>
     ) : null
   }
 </li>

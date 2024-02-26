@@ -25,25 +25,25 @@ This fixes part of the problem for some terminals, but simply changing the termi
 
 - **Hardcoded Colors**.
   Hopefully these are [ANSI colors](https://en.wikipedia.org/wiki/ANSI_escape_code#Colors).
-  Then the program specifies, that e.g. a portion of text should be red, and your terminal colorscheme then determines the specific shade of red.
+  Then the program specifies, that e.g. a portion of text should be red, and your terminal color scheme then determines the specific shade of red.
   However, this might be a concrete RGB value, in which case your out of luck.
 - **Inferred Colors**.
-  There are nonstandard ways for programs to detect, whether you use a light or dark terminal colorscheme (e.g. have a look at the [`terminal-light` Rust crate](https://github.com/Canop/terminal-light/tree/main), which links to a few nice sources in its code).
+  There are nonstandard ways for programs to detect, whether you use a light or dark terminal color scheme (e.g. have a look at the [`terminal-light` Rust crate](https://github.com/Canop/terminal-light/tree/main), which links to a few nice sources in its code).
   Based on this, the program can adjust its output and use light text on a dark background or vice verca.
 - **Adjustable Colors**.
   Some programs allow the user to control how it renders its output.
   Examples include [`bat`](https://github.com/sharkdp/bat), [`difft`](https://github.com/Wilfred/difftastic), and most programs using Charms [Glow](https://github.com/charmbracelet/glow) / [Lip Gloss](https://github.com/charmbracelet/lipgloss) libraries for highlighting text, such as GitHubs [`gh`](https://cli.github.com).
 
-Ideally the program infers the colorscheme, but lets you override the theme yourself.
-This way, you can still adjust the colorscheme to your liking.
+Ideally the program infers the color scheme, but lets you override the theme yourself.
+This way, you can still adjust the color scheme to your liking.
 Why this is still useful can be seen in the following image, displaying the output of the previously mentioned `bat` program, which, amongst others things, can output the contents of a file with syntax highlighting:
 
 ![Comparing the inferred base16 colors to a manually generated theme for the bat program.](./auto-dark-mode-for-fish-shell/dark-plus-bat-comparison.png)
 
 On the left, you see inferred colors from my terminal color scheme, which is Visual Studios Dark+ Theme for the Kitty terminal emulator.
-On the right you see the output when setting the colorscheme to a Dark+ Theme specifically created for `bat`.
-As can be seen, the right one highlights closer to how the colorscheme would look in VS Code itself.
-While the one on the left also uses colors from the general pallete of the theme, the right one uses green for comments, just as VS Code would, leading to a more familiar and uniform look.
+On the right you see the output when setting the color scheme to a Dark+ Theme specifically created for `bat`.
+As can be seen, the right one highlights closer to how the color scheme would look in VS Code itself.
+While the one on the left also uses colors from the general palette of the theme, the right one uses green for comments, just as VS Code would, leading to a more familiar and uniform look.
 
 ## How Fish Can Help
 
@@ -54,11 +54,11 @@ For this post, we want to focus on its ability to define [universal variables](h
 In short, the former is a variable that all shell instances share.
 These can also be exported, which means that they are available as an environment variable.
 The latter allows us to respond to changes of variables.
-Together, these two features enable us to configure the colorscheme of our CLI programs based on a single value.
+Together, these two features enable us to configure the color scheme of our CLI programs based on a single value.
 
 ## A Concrete Example
 
-Lets say we want to configure the colorscheme of both Diffastic and Bat.
+Lets say we want to configure the color scheme of both Diffastic and Bat.
 We also want to have a single source of truth for whether we are in dark or light mode.
 
 First, lets define this single value using a universal and exported fish variable.
@@ -84,7 +84,7 @@ set -Ux BAT_THEME 'Visual Studio Dark+'
 # This function will be automatically called, whenever COLOR_MODE is changed.
 function update_bat_theme --on-variable COLOR_MODE
     # Based on the new value of COLOR_MODE, we either configure
-    # bat to use our preferred light or dark colorscheme.
+    # bat to use our preferred light or dark color scheme.
     if [ $COLOR_MODE = light ]
         set BAT_THEME 'Solarized (light)'
     else
