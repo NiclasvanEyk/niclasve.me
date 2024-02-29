@@ -15,6 +15,11 @@ However, as a developer, one notable exception is the terminal.
 
 ## The Problem With Terminal Color Themes
 
+<!--
+TODO: Maybe talk about fundamentals here.
+      Terminal text _includes_ styles, similar to inline styles in HTML.
+-->
+
 Terminals used bright text on a dark background even before operating system dark mode was a thing.
 This is also why a lot of tools just assume dark mode, making.
 
@@ -73,6 +78,12 @@ So lets create `auto_dark_mode.fish`:
 set -Ux COLOR_MODE dark
 ```
 
+This now gives us a variable we can change in any shell and it will sync to all other instances:
+
+<video class="w-full">
+  <source src="./auto-dark-mode-for-fish-shell/universal-variables.mov" type="video/mov">
+</video>
+
 Now, lets create a separate configuration file for bat:
 
 ```fish
@@ -113,6 +124,61 @@ function update_difftastic_background --on-variable COLOR_MODE
 end
 ```
 
-### Automation
+## Automation
 
+By now we can manually run `set COLOR_MODE = dark` in our shell to explicitly tell our command line applications to adjust to dark mode.
+This works, but is a bit cumbersome to do every time you pick up your laptop in the evening or early morning.
+Since it is dark outside your OS _automatically_ adjusted, but our shell still kept the state it was in last time, which might be light mode.
+
+<!-- Simple Solution -->
+A simple solution is just ask the OS what mode we are in every time we start a new shell.
+Thanks the universal variables, starting a new shell would also update all the others.
+**TODO** A bit more text here.
+
+<!-- Dark Mode Daemon -- Motivation -->
+A better, but maybe slightly more complex solution is to somehow get notified when the OS dark mode changes and react to this.
+We can achieve this using [Dark Mode Daemon](https://github.com/NiclasvanEyk/dark-mode-daemon), which can be easily installed and launched at login via Homebrew.
+
+> To be honest, I searched for a solution to this problem for MacOS, but every article or forum post I did find told me to write my own Swift program and juggle with `.plist` entries.
+> This is not something I could easily put in my dotfiles, so I decided to automate this, leading to the creation of Dark Mode Daemon.
+> It still is a swift program, but you don't need to adjust it or maintain it.
+
+<!-- Dark Mode Daemon -- How it Works -->
+So what does it do?
+Basically, you place an executable script in `~/.config/dark-mode-daemon/scripts` and it will called when dark mode changes, you initially log in, and when your computer wakes up from sleep mode.
+It sets the `DMD_COLOR_MODE` to either `light` or `dark` when running the scripts, so we can very easily automate syncing our universal fish variable:
+
+```fish
+# ~/.config/dark-mode-daemon/scripts/fish-color-mode.fish
+
+#!/usr/bin/fish
+
+set COLOR_MODE $DMD_COLOR_MODE
+```
+
+And that's it!
+
+<details>
+  <summary>Bonus: Automate changing your terminal color scheme</summary>
+
+  If you are not using one of the previously mentioned terminals that can sync their color scheme, you might want to use Dark Mode Daemon to sync.
+  This is what I have done to have my terminal, Kitty, to sync its color scheme with the operation system one.
+
+  ```bash
+  # ~/.config/dark-mode-daemon/scripts/update-kitty-theme.sh
+
+  #!/usr/bin/env bash
+
+  # Link light.theme.conf or dark.theme.conf to current.theme.conf
+  ln -s -f "$HOME/.config/kitty/$DMD_COLOR_MODE.theme.conf" "$HOME/.config/kitty/current.theme.conf"
+
+  # Tell all running kitty instances that the color mode has changed and that they should reload their config
+  kill -SIGUSR1 $(pgrep -a kitty)
+  ```
+</details>
+
+
+## Conclusion
+
+<!-- TODO -->
 
