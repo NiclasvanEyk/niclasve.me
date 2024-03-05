@@ -29,6 +29,21 @@ export default {
         slideRightAndFade: 'slideRightAndFade 300ms cubic-bezier(0.16, 0, 0.13, 1)',
         slideLeftAndFade: 'slideLeftAndFade 300ms cubic-bezier(0.16, 0, 0.13, 1)',
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            'blockquote': {
+              fontStyle: 'normal',
+            },
+            'blockquote p:first-of-type::before': {
+              content: '',
+            },
+            'blockquote p:last-of-type::after': {
+              content: '',
+            },
+          },
+        },
+      },
     },
   },
   plugins: [typography],
