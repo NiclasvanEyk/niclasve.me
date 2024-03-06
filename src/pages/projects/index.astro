@@ -1,0 +1,35 @@
+---
+import Default from "@/layouts/Default.astro";
+import { project as projectPage } from "@/links";
+import { format } from "date-fns";
+import { getCollection } from "astro:content";
+
+const projects = (await getCollection("projects")).sort(
+  (a, b) => b.data.startedAt.valueOf() - a.data.startedAt.valueOf(),
+);
+---
+
+<Default>
+  <main>
+    <h1 class="p-3 text-2xl font-extrabold">Projects</h1>
+
+    <table>
+      <tbody>
+        {
+          projects.map((project) => (
+            <tr>
+              <td class="px-3 tabular-nums opacity-50">
+                {format(project.data.startedAt, "yyyy-MM-dd")}
+              </td>
+              <td class="px-3">
+                <a href={projectPage(project.slug)} class="hover:underline">
+                  {project.data.title}
+                </a>
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </main>
+</Default>

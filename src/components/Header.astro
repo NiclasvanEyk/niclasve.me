@@ -1,11 +1,8 @@
 ---
-import HeaderLink from "./HeaderLink.astro";
-import LetterRainbow from "./LetterRainbow.astro";
-import { SITE_TITLE } from '../consts';
-import { article } from "../links";
+import { SITE_TITLE } from "../consts";
 
 interface Props {
-	page?: {
+  page?: {
     href: string;
     text: string;
   };
@@ -14,80 +11,24 @@ interface Props {
 const { page } = Astro.props;
 ---
 
-<header class="top-navigation-container">
-  <nav class="top-navigation">
-    <a href="/" class="site-name rainbow">
-      <LetterRainbow word={SITE_TITLE} />
+<header class="flex flex-row place-content-center">
+  <nav class="flex w-full max-w-3xl items-center">
+    <a
+      href="/"
+      class="py-3 pl-3 tracking-tight text-zinc-900/80 dark:text-zinc-100/40"
+    >
+      {SITE_TITLE}
     </a>
 
-    { typeof page !== 'object' ? null : <>
-      <span class="divider">/</span>
-      <a href={page.href} class="sub-site">{page.text}</a>
-    </span> }
-
-    <div class="spacer"></div>
-
-    <div class="internal-links">
-      <!-- <HeaderLink href={article("")}>Blog</HeaderLink> -->
-      <!-- <HeaderLink href="/about">About</HeaderLink> -->
-    </div>
+    {
+      typeof page !== "object" ? null : (
+        <>
+          <span class="divider mx-1">/</span>
+          <a href={page.href} class="sub-site">
+            {page.text}
+          </a>
+        </>
+      )
+    }
   </nav>
 </header>
-<style>
-  header {
-    margin: 0;
-    padding: 0 1em;
-  }
-
-  .top-navigation-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .top-navigation {
-    width: 100%;
-    max-width: var(--site-container-width);
-  }
-
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  nav a {
-    padding: 1em 0.5em;
-    color: var(--fg-4);
-
-    &:hover {
-      color: var(--fg-0);
-    }
-  }
-
-  .divider {
-    color: var(--fg-4);
-    margin-inline: 0.5ch;
-    user-select: none;
-    cursor: normal;
-  }
-
-  nav a.site-name {
-    margin-inline: 0;
-    padding-inline: 0;
-  }
-
-  .site-name,
-  .sub-site {
-    text-decoration: none;
-  }
-
-  nav .sub-site {
-    padding-left: 0 !important;
-  }
-
-  .spacer {
-    flex: 1;
-  }
-</style>

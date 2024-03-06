@@ -1,3 +1,7 @@
 export function article(slug: string): string {
-  return `/writing/${slug}`;
+  return `/blog/${slug}`;
+}
+
+export function project(slug: string): string {
+  return `/projects/${slug}`;
 }

@@ -3,6 +3,9 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import * as content from '../content/pages/uses.md';
+
+const { Content } = content;
 ---
 
 <!doctype html>
@@ -12,16 +15,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	</head>
 	<body>
 		<Header page={{ href: "uses", text: "Uses" }} />
-		<main>
-			<h1>Tools, Software and Everything Else</h1>
-
-      <h2>Software</h2>
-
-      <h3>Applications</h3>
-
-      <h3>Command Line Tools</h3>
-
-      <h2>Hardware</h2>
+		<main class="prose lg:prose-xl dark:prose-invert">
+      <Content/>
 		</main>
 		<Footer />
 	</body>
