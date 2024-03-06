@@ -8,7 +8,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
 import { getCollection } from "astro:content";
 import { article } from "@/links";
 
-const posts = (await getCollection("blog")).sort(
+const posts = (await getCollection("blog", (entry) => entry.data.pubDate)).sort(
   (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
 );
 ---

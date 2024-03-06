@@ -8,7 +8,9 @@ import { Employer } from "@/components/Homepage/HoverCards/Employer";
 import { getCollection, getEntry } from "astro:content";
 import { project as projectPage } from "@/links";
 
-const latestBlogPosts = (await getCollection("blog")).slice(0, 3);
+const latestBlogPosts = (
+  await getCollection("blog", (entry) => entry.data.pubDate)
+).slice(0, 3);
 const selectedProjects = [
   (await getEntry("projects", "chers"))!,
   (await getEntry("projects", "keepac"))!,
