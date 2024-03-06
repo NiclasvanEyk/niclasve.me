@@ -7,22 +7,27 @@ import tailwind from "@astrojs/tailwind";
 import { rehypeHeadingIds } from '@astrojs/markdown-remark';
 import autolinkHeadings from 'rehype-autolink-headings';
 import react from "@astrojs/react";
-
 import expressiveCode from "astro-expressive-code";
-
-const expressiveCodeIntegration = expressiveCode({
-  themes: ['dark-plus', 'light-plus'],
-})
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://niclasve.me",
-  integrations: [sitemap(), serviceWorker(), tailwind(), react(), expressiveCodeIntegration, mdx()],
+  integrations: [
+    sitemap(),
+    serviceWorker(),
+    tailwind(),
+    react(),
+    expressiveCode({
+      themes: ['dark-plus', 'light-plus'],
+    }),
+    mdx(),
+  ],
   output: "static",
   markdown: {
-    rehypePlugins: [rehypeHeadingIds, [autolinkHeadings, {
-      behavior: 'wrap'
-    }]]
+    rehypePlugins: [
+      rehypeHeadingIds,
+      [autolinkHeadings, { behavior: 'wrap' }],
+    ],
   },
   adapter: vercel({
     webAnalytics: {
