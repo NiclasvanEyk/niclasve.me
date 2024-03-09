@@ -4,13 +4,13 @@ import BlogPost from "@/components/Homepage/BlogPost.astro";
 import Default from "@/layouts/Default.astro";
 import { Location } from "@/components/Homepage/HoverCards/Location";
 import { Employer } from "@/components/Homepage/HoverCards/Employer";
-
 import { getCollection, getEntry } from "astro:content";
 import { project as projectPage } from "@/links";
 
 const latestBlogPosts = (
   await getCollection("blog", (entry) => entry.data.pubDate)
 ).slice(0, 3);
+
 const selectedProjects = [
   (await getEntry("projects", "chers"))!,
   (await getEntry("projects", "keepac"))!,

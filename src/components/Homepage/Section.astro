@@ -1,15 +1,17 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLAttributes } from "astro/types";
 
-type Props = HTMLAttributes<'section'> & {
+type Props = HTMLAttributes<"section"> & {
   heading: string;
 };
 
 const { heading, class: className, ...props } = Astro.props;
 ---
 
-<section class:list={[className, "px-4"]} {...props}>
-  <h2 class="uppercase cursor-default select-none text-xs font-medium tracking-wide opacity-75 mb-1">
+<section class:list={[className]} {...props}>
+  <h2
+    class="mb-1 cursor-default select-none text-xs font-medium uppercase tracking-wide opacity-75"
+  >
     {heading}
   </h2>
 

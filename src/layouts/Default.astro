@@ -21,7 +21,9 @@ const props = Astro.props;
       description={props.description ?? SITE_DESCRIPTION}
     />
   </head>
-  <body class="bg-white text-zinc-900 dark:bg-black dark:text-zinc-200">
+  <body
+    class="bg-white px-6 text-zinc-900 xl:px-0 dark:bg-black dark:text-zinc-200"
+  >
     <Header />
 
     <SiteContainer>

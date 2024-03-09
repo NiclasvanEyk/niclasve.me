@@ -1,12 +1,17 @@
-
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLAttributes } from "astro/types";
 
-type Props = HTMLAttributes<'div'>;
+interface Props<Tag extends keyof astroHTML.JSX.DefinedIntrinsicElements>
+  extends HTMLAttributes<Tag> {
+  as?: Tag;
+}
 
-const { class: className, ...props } = Astro.props;
+let { class: className, as, ...props } = Astro.props;
+as ??= "div";
+
+const Tag = as;
 ---
 
-<div class:list={[className, "max-w-3xl mx-auto"]} {...props}>
-	<slot />
-</div>
+<Tag class:list={[className, "mx-auto max-w-3xl"]} {...props}>
+  <slot />
+</Tag>
