@@ -7,6 +7,7 @@ const blog = defineCollection({
     pubDate: z.coerce.date().optional(),
     updatedDate: z.coerce.date().optional(),
     heroImage: z.string().optional(),
+    forceTheme: z.enum(["light", "dark"]).optional(),
   }),
 });
 
@@ -17,6 +18,7 @@ const projects = defineCollection({
     startedAt: z.coerce.date(),
     github: z.string().url().optional(),
     website: z.string().url().optional(),
+    forceTheme: z.enum(["light", "dark"]).optional(),
   }),
 });
 

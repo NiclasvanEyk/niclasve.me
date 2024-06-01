@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 }
 
 type Props = CollectionEntry<"projects">;
-const { slug } = Astro.params;
+const { slug, forceTheme } = Astro.params;
 
 const projects = await getCollection("projects");
 const project = projects.find((page) => page.slug === slug);
@@ -20,10 +20,12 @@ if (!project) return Astro.redirect("/404");
 const { Content } = await project.render();
 ---
 
-<Default>
-  <main>
+<Default forceTheme={project.data.forceTheme}>
+  <main class="mt-24">
     <article class="prose dark:prose-invert">
-      <h1 class="p-3 text-2xl font-extrabold">{project.data.title}</h1>
+      <h1 class="py-3 text-2xl font-extrabold">
+        {project.data.title}
+      </h1>
 
       <Content />
     </article>

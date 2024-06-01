@@ -1,11 +1,11 @@
 ---
 import Section from "@/components/Homepage/Section.astro";
 import BlogPost from "@/components/Homepage/BlogPost.astro";
+import Project from "@/components/Homepage/Project.astro";
 import Default from "@/layouts/Default.astro";
 import { Location } from "@/components/Homepage/HoverCards/Location";
 import { Employer } from "@/components/Homepage/HoverCards/Employer";
 import { getCollection, getEntry } from "astro:content";
-import { project as projectPage } from "@/links";
 
 const latestBlogPosts = (
   await getCollection("blog", (entry) => entry.data.pubDate)
@@ -14,6 +14,7 @@ const latestBlogPosts = (
 const selectedProjects = [
   (await getEntry("projects", "chers"))!,
   (await getEntry("projects", "keepac"))!,
+  (await getEntry("projects", "diy"))!,
 ];
 ---
 
@@ -25,38 +26,24 @@ const selectedProjects = [
         <Location client:load />
         and work for
         <Employer client:load /> as a developer on the data team. This is my personal
-        website, where I write, experiment, and document.
+        website.
       </p>
     </Section>
 
-    <Section heading="Blog">
+    <Section heading="Projects" class="pb-6">
+      <p>A list of my personal projects.</p>
+
+      <ul class="-mx-4 mt-4 grid auto-rows-fr grid-cols-2 gap-2">
+        {selectedProjects.map((project) => <Project project={project} />)}
+      </ul>
+    </Section>
+
+    <Section heading="Blog" href="/blog">
       <p>The latest and greatest. Mostly technical.</p>
 
       <ol class="mt-4 space-y-2">
         {latestBlogPosts.map((post) => <BlogPost post={post} />)}
       </ol>
-    </Section>
-
-    <Section heading="Projects" class="pb-6">
-      <p>A list of projects that I want to higlight.</p>
-
-      <ul class="-mx-4 mt-4 grid auto-rows-fr grid-cols-2 gap-2">
-        {
-          selectedProjects.map((project) => (
-            <li class="block min-h-full rounded p-4 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900">
-              <a
-                href={projectPage(project.slug)}
-                class="font-bold hover:underline"
-              >
-                <h4>{project.data.title}</h4>
-              </a>
-              <p class="cursor-default opacity-75">
-                {project.data.description}
-              </p>
-            </li>
-          ))
-        }
-      </ul>
     </Section>
   </main>
 </Default>

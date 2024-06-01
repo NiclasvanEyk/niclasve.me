@@ -8,22 +8,13 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 interface Props {
   title?: string;
   description?: string;
-  forceTheme?: "light" | "dark";
 }
 
 const props = Astro.props;
-let htmlAttrs = {};
-
-if (props.forceTheme) {
-  htmlAttrs = {
-    "data-theme": `${props.forceTheme}-plus`,
-    class: props.forceTheme,
-  };
-}
 ---
 
 <!doctype html>
-<html lang="en" {...htmlAttrs}>
+<html lang="en" transition:animate="none">
   <head>
     <BaseHead
       title={props.title ?? SITE_TITLE}

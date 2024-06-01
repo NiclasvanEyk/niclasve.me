@@ -3,16 +3,25 @@ import type { HTMLAttributes } from "astro/types";
 
 type Props = HTMLAttributes<"section"> & {
   heading: string;
+  href?: string;
 };
 
-const { heading, class: className, ...props } = Astro.props;
+const { heading, href, class: className, ...props } = Astro.props;
 ---
 
 <section class:list={[className]} {...props}>
   <h2
     class="mb-1 cursor-default select-none text-xs font-medium uppercase tracking-wide opacity-75"
   >
-    {heading}
+    {
+      href ? (
+        <a href={href} class="hover:underline">
+          {heading}
+        </a>
+      ) : (
+        heading
+      )
+    }
   </h2>
 
   <div class="text-base">

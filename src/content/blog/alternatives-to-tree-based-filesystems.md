@@ -1,9 +1,7 @@
 ---
-title: "Tags > Hierarchy"
+title: "Alternatives To Hierarchical Filesystems"
 description: ""
-pubDate: "Jul 01 2022"
-heroImage: ""
-
+# pubDate: ""
 # TODO: Adjust the title
 ---
 

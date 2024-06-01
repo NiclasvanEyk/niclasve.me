@@ -43,7 +43,7 @@ Ideally the program infers the color scheme, but lets you override the theme you
 This way, you can still adjust the color scheme to your liking.
 Why this is still useful can be seen in the following image, displaying the output of the previously mentioned `bat` program, which, amongst others things, can output the contents of a file with syntax highlighting:
 
-![Comparing the inferred base16 colors to a manually generated theme for the bat program.](./auto-dark-mode-for-fish-shell/dark-plus-bat-comparison.png)
+![Comparing the inferred base16 colors to a manually generated theme for the bat program.](../../../public/blog/auto-dark-mode-for-fish-shell/dark-plus-bat-comparison.png)
 
 On the left, you see inferred colors from my terminal color scheme, which is Visual Studios Dark+ Theme for the Kitty terminal emulator.
 On the right you see the output when setting the color scheme to a Dark+ Theme specifically created for `bat`.
@@ -63,6 +63,12 @@ Together, these two features enable us to configure the color scheme of our CLI 
 
 ## A Concrete Example
 
+
+<!-- TODO: Replace the video -->
+<video class="w-full" controls loop playsinline autoplay muted>
+  <source src="/blog/auto-dark-mode-for-fish-shell/universal-variables.mp4" type="video/mp4">
+</video>
+
 Lets say we want to configure the color scheme of both Diffastic and Bat.
 We also want to have a single source of truth for whether we are in dark or light mode.
 
@@ -80,8 +86,8 @@ set -Ux COLOR_MODE dark
 
 This now gives us a variable we can change in any shell and it will sync to all other instances:
 
-<video class="w-full">
-  <source src="./auto-dark-mode-for-fish-shell/universal-variables.mov" type="video/mov">
+<video class="w-full" controls loop playsinline autoplay muted>
+  <source src="/blog/auto-dark-mode-for-fish-shell/universal-variables.mp4" type="video/mp4">
 </video>
 
 Now, lets create a separate configuration file for bat:
@@ -161,7 +167,7 @@ And that's it!
 <details>
   <summary>Bonus: Automate changing your terminal color scheme</summary>
 
-  If you are not using one of the previously mentioned terminals that can sync their color scheme, you might want to use Dark Mode Daemon to sync.
+  If you are not using one of the previously mentioned terminals that can sync their color scheme, you might want to utilize Dark Mode Daemon.
   This is what I have done to have my terminal, Kitty, to sync its color scheme with the operation system one.
 
   ```bash
@@ -172,9 +178,19 @@ And that's it!
   # Link light.theme.conf or dark.theme.conf to current.theme.conf
   ln -s -f "$HOME/.config/kitty/$DMD_COLOR_MODE.theme.conf" "$HOME/.config/kitty/current.theme.conf"
 
-  # Tell all running kitty instances that the color mode has changed and that they should reload their config
+  # Tell all running kitty instances that the color mode has changed and that they should reload their config.
   kill -SIGUSR1 $(pgrep -a kitty)
   ```
+
+  To make the above script work, we need to add the following to our kitty configuration file:
+
+  ```plain title="~/.config/kitty/kitty.conf"
+  include current.theme.conf
+  ```
+
+  and then create `~/.config/kitty/dark.theme.conf` and `~/.config/kitty/light.theme.conf`, which contain our chosen theme files.
+  The script will then link `current.theme.conf` to the theme based on the OS color scheme.
+  Themes files can be retrieved from the [`kitty-themes` repository on GitHub](https://github.com/dexpota/kitty-themes/tree/master/themes) or by using the `kitty +kitten themes` command.
 </details>
 
 

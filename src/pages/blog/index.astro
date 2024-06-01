@@ -20,12 +20,10 @@ const posts = (await getCollection("blog", (entry) => entry.data.pubDate)).sort(
   </head>
   <body class="bg-white text-zinc-900 dark:bg-black dark:text-zinc-200">
     <Header page={{ href: article(""), text: "Blog" }} />
-    <SiteContainer>
-      <main class="space-y-24">
-        <ol>
-          {posts.map((post) => <BlogPost post={post} />)}
-        </ol>
-      </main>
+    <SiteContainer as="main" class="mt-24 space-y-24">
+      <ol>
+        {posts.map((post) => <BlogPost post={post} />)}
+      </ol>
     </SiteContainer>
     <Footer />
   </body>

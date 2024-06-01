@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { project as projectPage } from "@/links";
+
+type Props = {
+  project: CollectionEntry<"project">;
+};
+
+const { project } = Astro.props;
+---
+
+<li
+  class="block min-h-full rounded p-4 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900"
+>
+  <a href={projectPage(project.slug)} class="font-bold hover:underline">
+    <h4>
+      {project.data.title}
+    </h4>
+  </a>
+  <p class="cursor-default opacity-75">
+    {project.data.description}
+  </p>
+</li>

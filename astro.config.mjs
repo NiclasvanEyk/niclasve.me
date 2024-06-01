@@ -19,6 +19,10 @@ export default defineConfig({
     react(),
     expressiveCode({
       themes: ['dark-plus', 'light-plus'],
+
+      styleOverrides: {
+        codeFontFamily: "'Berkeley Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace"
+      },
     }),
     mdx(),
   ],

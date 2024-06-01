@@ -1,21 +1,31 @@
 ---
 title: Keepac
-description: Read, edit and query changelogs from your terminal
+description: Read, edit and query changelogs from your terminal.
 startedAt: 2024-01-01
 github: https://github.com/NiclasvanEyk/keepac
+forceTheme: dark
 ---
 
-**Keep** **a** **C**hangelog. Heh.
+> Named after the first few letters of [**keepac**hangelog.com](https://keepachangelog.com).
 
-> TODO: Find a good introduction!
-
-It alleviates us from thinking about files.
-**Keepac** attempts to do the same.
-Its binary, `changelog`, makes all commands feel natural:
 
 > TODO: Document, that these are actually shortcuts for editing the `README.md` according to the keep a changelog guidelines.
 
-Initialized a new project?
+The Keep a Changelog best practises provide a solid foundation when writing changelogs.
+This way, you can concentrate on writing the changelog itself.
+
+Keepac helps you work with changelogs following these conventions.
+Its binary, `changelog`, makes all commands feel natural.
+
+## Example workflow
+
+I am a fan of examples.
+Let's walk through common software development steps to show how Keepac can help us documenting the user-facing changes.
+The command line blocks show the commands and their respective output.
+Below the commands you also see the diff of the `CHANGELOG.md` file.
+
+Now imagine you have already created your project using something like `cargo new`, `npm create`, or something else.
+Since we are very disciplined developers, we start documenting our changes right away.
 
 ```ansi
 $ changelog init
@@ -36,6 +46,7 @@ Initialized empty changelog at /tmp/keepac-demo/CHANGELOG.md:
 <br>
 
 ```diff lang="md" title="CHANGELOG.md"
+
 + # Changelog
 +
 + All notable changes to this project will be documented in this file.
@@ -46,7 +57,17 @@ Initialized empty changelog at /tmp/keepac-demo/CHANGELOG.md:
 + ## [Unreleased]
 ```
 
-Want to document a new feature?
+
+That was easy!
+We did not even have to open a clunky IDE, or whatever text editor you prefer.
+
+> If you use `git` on the command line, this workflow feels very similar to `git init`.
+> This is on purpose.
+> While the `git` CLI is not known for being intuitive, it has some nice features that inspired `changelog`.
+
+Now implement a new feature.
+The details are not important, just imagine we added a new API that our users should know about, because it will make their lives easier.
+Again, we use `changelog` for this, directly from our terminal.
 
 ```ansi
 $ changelog add "A shiny new feature"

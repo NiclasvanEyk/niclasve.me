@@ -13,11 +13,11 @@ type Props = PartialBy<CollectionEntry<"blog">["data"], "pubDate"> & {
   slug: string;
 };
 
-const { title, forceTheme, description, pubDate, updatedDate, heroImage } =
+const { title, description, pubDate, updatedDate, heroImage, slug } =
   Astro.props;
 ---
 
-<html lang="en" {...forceTheme ? { "data-theme": `${forceTheme}-plus` } : {}}>
+<html lang="en">
   <head>
     <BaseHead title={title} description={description} />
   </head>
@@ -36,7 +36,7 @@ const { title, forceTheme, description, pubDate, updatedDate, heroImage } =
         </div>
         <div class="prose dark:prose-invert">
           <div class="title mb-16">
-            <h1 class="!mb-3">
+            <h1 class="!mb-3" transition:name={`post-title[${slug}]`}>
               {title}
             </h1>
 
