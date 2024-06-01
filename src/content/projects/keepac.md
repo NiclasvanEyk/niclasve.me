@@ -9,8 +9,6 @@ forceTheme: dark
 > Named after the first few letters of [**keepac**hangelog.com](https://keepachangelog.com).
 
 
-> TODO: Document, that these are actually shortcuts for editing the `README.md` according to the keep a changelog guidelines.
-
 The Keep a Changelog best practises provide a solid foundation when writing changelogs.
 This way, you can concentrate on writing the changelog itself.
 
@@ -19,10 +17,11 @@ Its binary, `changelog`, makes all commands feel natural.
 
 ## Example workflow
 
-I am a fan of examples.
 Let's walk through common software development steps to show how Keepac can help us documenting the user-facing changes.
 The command line blocks show the commands and their respective output.
 Below the commands you also see the diff of the `CHANGELOG.md` file.
+
+### Creating The Changelog File
 
 Now imagine you have already created your project using something like `cargo new`, `npm create`, or something else.
 Since we are very disciplined developers, we start documenting our changes right away.
@@ -59,14 +58,16 @@ Initialized empty changelog at /tmp/keepac-demo/CHANGELOG.md:
 
 
 That was easy!
-We did not even have to open a clunky IDE, or whatever text editor you prefer.
+We did not even have to open our IDE or text editor.
 
-> If you use `git` on the command line, this workflow feels very similar to `git init`.
-> This is on purpose.
-> While the `git` CLI is not known for being intuitive, it has some nice features that inspired `changelog`.
+If you use `git` on the command line, this workflow feels very similar to `git init`.
+This is on purpose.
+While the `git` CLI is not known for being intuitive, it has some nice features that inspired `changelog`.
 
-Now implement a new feature.
-The details are not important, just imagine we added a new API that our users should know about, because it will make their lives easier.
+### Documenting Changes
+
+Now imagine we have implement a new feature.
+The details are not important, just imagine we added a new API that our users should know about.
 Again, we use `changelog` for this, directly from our terminal.
 
 ```ansi
@@ -94,7 +95,15 @@ $ changelog add "A shiny new feature"
 + - A shiny new feature
 ```
 
-Want to remove an existing one?
+Similar to `git`, if you omit the message, your `$EDITOR` would open and you could provide more detail.
+
+-------------------------------------------------------------------------------
+
+### Removing, Changing, Or Deprecating Features
+
+In our fictional example, it won't really make sense to document the removal of features.
+However, the Keep a Changelog guidelines list several types of changes, such as bug fixes, deprecations or general changes in behavior of the software.
+Let's document the removal of an old feature that we no longer want to support, just to see how that would work.
 
 ```ansi
 $ changelog rm "A boring old feature"
@@ -125,7 +134,21 @@ $ changelog rm "A boring old feature"
 + - A boring old feature
 ```
 
-Want to see what changes are included in the upcoming release?
+Instead of using the shortcuts (`add`, `change`, `deprecate`, ...), you may also run the generic `changelog insert` and pass one of the following flags
+- `--added`
+- `--changed`
+- `--deprecated`
+- `--fixed`
+- `--removed`
+- `--security`
+
+You can run `changelog insert --help` to see a complete list of the supported change types, including their shortcuts and aliases.
+
+### Releasing
+
+Up until now, all our changes are documented under the `[Unreleased]` section.
+Now we are going to change that.
+First, we check what's contained in our next release.
 
 ```ansi
 $ changelog show next
@@ -141,7 +164,10 @@ $ changelog show next
 [38;5;252m[0m[38;5;252m[0m  [38;5;252m• [0m[38;5;252mA boring old[0m[38;5;252m feature[0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m[38;5;252m [0m
 ```
 
-Want to actually release?
+Just as we expect, it only consists of our two changes.
+To be fair, this command is much more helpful when you have a long list of historic releases that you don't want to look at every time.
+
+Now we choose, whether we want to increment the major, minor, or patch version and run the `release` command.
 
 ```ansi
 $ changelog release --minor
@@ -179,12 +205,27 @@ $ changelog release --minor
   - A boring old feature
 ```
 
-All of these can be run from anywhere in your project.
-We search upwards the directory tree, until a `CHANGELOG.md` is found.
-Similar to how Git does it when you run `git commit` or `git status`.
+We chose to explicitly pass the `--minor` flag here, but you can also pass no flag to the `release` command to interactively choose the next version.
 
-There is more to explore, viewing a summary of release notes from multiple releases or a search feature, which automatically displays the version for query results.
-Try replicating that via `grep`!
+## Closing Notes
 
-The installation (or even compiling from scratch) is simple and documented [on GitHub](http://github.com/NiclasvanEyk/keepac).
-Run `changelog --help` or `changelog SUBCOMMAND --help` for all the details.
+And now we are done!
+The steps in the example are roughly the workflows that motivated the creation of Keepac.
+I grew tired of looking up the exact headings that Keep a Changelog uses, inserting them manually, or manually looking up todays date for a release.
+Every one of these steps does not sound that inconvenient, but I found implementing them using `changelog` much more convenient!
+
+There is more to explore.
+You can run `changelog --help` to explore everything.
+Here are some examples:
+- generate the text for a GitHub release using `changelog show --plain $VERSION` ([example from Keepacs own release workflow](https://github.com/NiclasvanEyk/keepac/blob/main/.github/workflows/goreleaser.yml#L26))
+- open up `CHANGELOG.md` from anywhere in your project using `changelog edit`
+- view the changes of multiple releases combined using `changelog diff --merged 0.2.0 0.2.8`
+- search for strings in changelogs (like `grep`) and see the resulting within context (version, changetype, unlike `grep`)
+
+If you want to try it out and you run Linux or MacOS, just run
+
+```shell
+brew install niclasvaneyk/keepac/keepac
+```
+
+To learn more, such as how to compile it from scratch for Windows support, is visit the project [on GitHub](https://github.com/NiclasvanEyk/keepac).
