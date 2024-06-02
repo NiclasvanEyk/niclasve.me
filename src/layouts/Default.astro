@@ -18,7 +18,8 @@ let htmlAttrs = {};
 if (props.forceTheme) {
   htmlAttrs = {
     "data-theme": `${props.forceTheme}-plus`,
-    class: props.forceTheme,
+    // The strings need to appear here, in order for tailwind to pick them up
+    class: props.forceTheme === "dark" ? "dark" : "light",
   };
 }
 ---

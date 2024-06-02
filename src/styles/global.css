@@ -7,14 +7,14 @@
   /* fix for Chrome */
 }
 
-.expressive-code .frame {
-  box-shadow: unset !important;
-}
-
 @supports (font-variation-settings: normal) {
   :root {
     font-family: InterVariable, sans-serif;
   }
+}
+
+.expressive-code .frame {
+  box-shadow: unset !important;
 }
 
 :root {
@@ -24,30 +24,4 @@
 body {
   margin: 0;
   padding: 0;
-}
-
-.rainbow {
-  &> :nth-child(1n):hover {
-    color: var(--red);
-  }
-
-  &> :nth-child(2n):hover {
-    color: var(--green);
-  }
-
-  &> :nth-child(3n):hover {
-    color: var(--yellow);
-  }
-
-  &> :nth-child(4n):hover {
-    color: var(--blue);
-  }
-
-  &> :nth-child(5n):hover {
-    color: var(--purple);
-  }
-
-  &> :nth-child(6):hover {
-    color: var(--aqua);
-  }
 }
