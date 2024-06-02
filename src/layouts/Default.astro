@@ -8,6 +8,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 interface Props {
   title?: string;
   description?: string;
+  root?: true;
   forceTheme?: "light" | "dark";
 }
 
@@ -31,9 +32,9 @@ if (props.forceTheme) {
     />
   </head>
   <body
-    class="bg-white px-6 font-mono text-zinc-900 xl:px-0 dark:bg-black dark:text-zinc-200"
+    class="bg-white px-6 text-zinc-900 xl:px-0 dark:bg-black dark:text-zinc-200"
   >
-    <Header />
+    <Header root={props.root} />
 
     <SiteContainer>
       <slot />

@@ -11,17 +11,25 @@ const projects = (await getCollection("projects")).sort(
 
 <Default>
   <main>
-    <h1 class="p-3 text-2xl font-extrabold">Projects</h1>
+    <h1 class="mb-3 mt-24 text-2xl font-extrabold">Projects</h1>
+
+    <p class="my-3">
+      This is basically a cleaner version of <a
+        class="underline"
+        href="https://github.com/NiclasvanEyk?tab=repositories"
+        >my repository list on GitHub</a
+      >.
+    </p>
 
     <table>
       <tbody>
         {
           projects.map((project) => (
             <tr>
-              <td class="px-3 tabular-nums opacity-50">
+              <td class="py-1 align-top tabular-nums opacity-50">
                 {format(project.data.startedAt, "yyyy-MM-dd")}
               </td>
-              <td class="px-3">
+              <td class="px-3 py-1">
                 <a href={projectPage(project.slug)} class="hover:underline">
                   {project.data.title}
                 </a>

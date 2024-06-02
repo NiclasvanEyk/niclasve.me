@@ -10,9 +10,12 @@ const { project } = Astro.props;
 ---
 
 <li
-  class="block min-h-full rounded p-4 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900"
+  class="group block min-h-full rounded p-4 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900"
 >
-  <a href={projectPage(project.slug)} class="font-bold hover:underline">
+  <a
+    href={projectPage(project.slug)}
+    class="relative font-bold group-hover:underline"
+  >
     <h4>
       {project.data.title}
     </h4>

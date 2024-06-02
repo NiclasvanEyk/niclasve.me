@@ -1,13 +1,12 @@
 ---
 title: Keepac
 description: Read, edit and query changelogs from your terminal.
-startedAt: 2024-01-01
+startedAt: 2023-05-19
 github: https://github.com/NiclasvanEyk/keepac
 forceTheme: dark
 ---
 
 > Named after the first few letters of [**keepac**hangelog.com](https://keepachangelog.com).
-
 
 The Keep a Changelog best practises provide a solid foundation when writing changelogs.
 This way, you can concentrate on writing the changelog itself.
@@ -56,7 +55,6 @@ Initialized empty changelog at /tmp/keepac-demo/CHANGELOG.md:
 + ## [Unreleased]
 ```
 
-
 That was easy!
 We did not even have to open our IDE or text editor.
 
@@ -97,7 +95,7 @@ $ changelog add "A shiny new feature"
 
 Similar to `git`, if you omit the message, your `$EDITOR` would open and you could provide more detail.
 
--------------------------------------------------------------------------------
+---
 
 ### Removing, Changing, Or Deprecating Features
 
@@ -130,11 +128,12 @@ $ changelog rm "A boring old feature"
   - A shiny new feature
 
 + ### Removed
-+ 
++
 + - A boring old feature
 ```
 
 Instead of using the shortcuts (`add`, `change`, `deprecate`, ...), you may also run the generic `changelog insert` and pass one of the following flags
+
 - `--added`
 - `--changed`
 - `--deprecated`
@@ -217,6 +216,7 @@ Every one of these steps does not sound that inconvenient, but I found implement
 There is more to explore.
 You can run `changelog --help` to explore everything.
 Here are some examples:
+
 - generate the text for a GitHub release using `changelog show --plain $VERSION` ([example from Keepacs own release workflow](https://github.com/NiclasvanEyk/keepac/blob/main/.github/workflows/goreleaser.yml#L26))
 - open up `CHANGELOG.md` from anywhere in your project using `changelog edit`
 - view the changes of multiple releases combined using `changelog diff --merged 0.2.0 0.2.8`

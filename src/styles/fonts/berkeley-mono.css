@@ -1,0 +1,40 @@
+/**
+ * You need a proper personal licence to use these fonts, so don't just
+ * self-host and re-use these files!
+ */
+
+/* Regular */
+@font-face {
+  font-family: "Berkeley Mono";
+  src:
+    url("https://pub-e417db9731774f6db4aae3b98e70ba66.r2.dev/fonts%2Fberkeley-mono%2FBerkeleyMono-Regular.woff2") format("woff2"),
+    url("https://pub-e417db9731774f6db4aae3b98e70ba66.r2.dev/fonts%2Fberkeley-mono%2FBerkeleyMono-Regular.woff") format("woff");
+}
+
+/* Bold */
+@font-face {
+  font-family: "Berkeley Mono";
+  font-weight: bold;
+  src:
+    url("https://pub-e417db9731774f6db4aae3b98e70ba66.r2.dev/fonts%2Fberkeley-mono%2FBerkeleyMono-Bold.woff2") format("woff2"),
+    url("https://pub-e417db9731774f6db4aae3b98e70ba66.r2.dev/fonts%2Fberkeley-mono%2FBerkeleyMono-Bold.woff") format("woff");
+}
+
+/* Italic */
+@font-face {
+  font-family: "Berkeley Mono";
+  font-style: italic;
+  src:
+    url("https://pub-e417db9731774f6db4aae3b98e70ba66.r2.dev/fonts%2Fberkeley-mono%2FBerkeleyMono-Italic.woff2") format("woff2"),
+    url("https://pub-e417db9731774f6db4aae3b98e70ba66.r2.dev/fonts%2Fberkeley-mono%2FBerkeleyMono-Italic.woff") format("woff");
+}
+
+/* BoldItalic */
+@font-face {
+  font-family: "Berkeley Mono";
+  font-weight: bold;
+  font-style: italic;
+  src:
+    url("https://pub-e417db9731774f6db4aae3b98e70ba66.r2.dev/fonts%2Fberkeley-mono%2FBerkeleyMono-BoldItalic.woff2") format("woff2"),
+    url("https://pub-e417db9731774f6db4aae3b98e70ba66.r2.dev/fonts%2Fberkeley-mono%2FBerkeleyMono-BoldItalic.woff") format("woff");
+}

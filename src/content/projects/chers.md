@@ -1,7 +1,7 @@
 ---
-title: Chers
+title: "Chers"
 description: Chess for the terminal and web.
-startedAt: 2024-01-01
+startedAt: 2023-09-20
 github: https://github.com/NiclasvanEyk/chers
 website: https://chers.niclasve.me
 ---
@@ -16,4 +16,3 @@ That however, required to also build a web UI in addition to the terminal one.
 The implementation is definitely not complete though.
 While all movement patterns, detecting checks and check mates, and even some more exotic rules like en passant do work, castling and e.g. proper movement clocks do not.
 I'd also like to implement peer to peer matches via sockets.
-
