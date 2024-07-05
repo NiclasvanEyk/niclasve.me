@@ -63,12 +63,6 @@ Together, these two features enable us to configure the color scheme of our CLI 
 
 ## A Concrete Example
 
-
-<!-- TODO: Replace the video -->
-<video class="w-full" controls loop playsinline autoplay muted>
-  <source src="/blog/auto-dark-mode-for-fish-shell/universal-variables.mp4" type="video/mp4">
-</video>
-
 Lets say we want to configure the color scheme of both Diffastic and Bat.
 We also want to have a single source of truth for whether we are in dark or light mode.
 
@@ -87,7 +81,7 @@ set -Ux COLOR_MODE dark
 This now gives us a variable we can change in any shell and it will sync to all other instances:
 
 <video class="w-full" controls loop playsinline autoplay muted>
-  <source src="/blog/auto-dark-mode-for-fish-shell/universal-variables.mp4" type="video/mp4">
+  <source src="https://cdn.niclasve.me/videos%2Ffish-universal-variables.mp4" type="video/mp4">
 </video>
 
 Now, lets create a separate configuration file for bat:
