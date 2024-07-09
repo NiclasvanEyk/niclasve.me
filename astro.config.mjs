@@ -12,6 +12,7 @@ import expressiveCode from "astro-expressive-code";
 // https://astro.build/config
 export default defineConfig({
   site: "https://niclasve.me",
+  prefetch: true,
   integrations: [
     sitemap(),
     serviceWorker(),
@@ -19,7 +20,6 @@ export default defineConfig({
     react(),
     expressiveCode({
       themes: ['dark-plus', 'light-plus'],
-
       styleOverrides: {
         codeFontFamily: "'Berkeley Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace"
       },
