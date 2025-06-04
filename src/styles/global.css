@@ -1,5 +1,8 @@
 @import "./prose.css";
 @import "./fonts/berkeley-mono.css";
+@import "tailwindcss";
+
+@config "../../tailwind.config.mjs";
 
 :root {
   font-family: Inter, sans-serif;
