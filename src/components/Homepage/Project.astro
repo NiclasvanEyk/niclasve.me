@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import { project as projectPage } from "@/links";
 
 type Props = {
-  project: CollectionEntry<"project">;
+  project: CollectionEntry<"projects">;
 };
 
 const { project } = Astro.props;
@@ -13,7 +13,7 @@ const { project } = Astro.props;
   class="group block min-h-full rounded p-4 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900"
 >
   <a
-    href={projectPage(project.slug)}
+    href={projectPage(project.id.replace(/\.md$/, ""))}
     class="relative font-bold group-hover:underline"
   >
     <h4>

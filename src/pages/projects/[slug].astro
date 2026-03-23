@@ -1,11 +1,11 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
+import { type CollectionEntry, getCollection, render } from "astro:content";
 import Default from "@/layouts/Default.astro";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
   return projects.map((project) => ({
-    params: { slug: project.slug },
+    params: { slug: project.id },
     props: project,
   }));
 }
@@ -14,11 +14,11 @@ type Props = CollectionEntry<"projects">;
 const { slug, forceTheme } = Astro.params;
 
 const projects = await getCollection("projects");
-const project = projects.find((page) => page.slug === slug);
+const project = projects.find((page) => page.id === slug);
 if (!project) return Astro.redirect("/404");
 
 const { github, website } = project.data;
-const { Content } = await project.render();
+const { Content } = await render(project);
 ---
 
 <Default forceTheme={project.data.forceTheme}>
