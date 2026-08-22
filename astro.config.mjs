@@ -3,7 +3,7 @@ import mdx from "@astrojs/mdx";
 import serviceWorker from "astrojs-service-worker";
 import sitemap from "@astrojs/sitemap";
 import vercel from "@astrojs/vercel";
-import { rehypeHeadingIds } from "@astrojs/markdown-remark";
+import { rehypeHeadingIds, unified } from "@astrojs/markdown-remark";
 import autolinkHeadings from "rehype-autolink-headings";
 import react from "@astrojs/react";
 import expressiveCode from "astro-expressive-code";
@@ -12,6 +12,7 @@ import tailwindcss from "@tailwindcss/vite";
 // https://astro.build/config
 export default defineConfig({
   site: "https://niclasve.me",
+  compressHTML: true,
   prefetch: {
     prefetchAll: true,
   },
@@ -30,7 +31,12 @@ export default defineConfig({
   ],
   output: "static",
   markdown: {
-    rehypePlugins: [rehypeHeadingIds, [autolinkHeadings, { behavior: "wrap" }]],
+    processor: unified({
+      rehypePlugins: [
+        rehypeHeadingIds,
+        [autolinkHeadings, { behavior: "wrap" }],
+      ],
+    }),
   },
   adapter: vercel({
     webAnalytics: {
