@@ -6,6 +6,7 @@
 /* Regular */
 @font-face {
   font-family: "Berkeley Mono";
+  font-display: swap;
   src:
     url("https://pub-e417db9731774f6db4aae3b98e70ba66.r2.dev/fonts%2Fberkeley-mono%2FBerkeleyMono-Regular.woff2") format("woff2"),
     url("https://pub-e417db9731774f6db4aae3b98e70ba66.r2.dev/fonts%2Fberkeley-mono%2FBerkeleyMono-Regular.woff") format("woff");
@@ -15,6 +16,7 @@
 @font-face {
   font-family: "Berkeley Mono";
   font-weight: bold;
+  font-display: swap;
   src:
     url("https://pub-e417db9731774f6db4aae3b98e70ba66.r2.dev/fonts%2Fberkeley-mono%2FBerkeleyMono-Bold.woff2") format("woff2"),
     url("https://pub-e417db9731774f6db4aae3b98e70ba66.r2.dev/fonts%2Fberkeley-mono%2FBerkeleyMono-Bold.woff") format("woff");
@@ -24,6 +26,7 @@
 @font-face {
   font-family: "Berkeley Mono";
   font-style: italic;
+  font-display: swap;
   src:
     url("https://pub-e417db9731774f6db4aae3b98e70ba66.r2.dev/fonts%2Fberkeley-mono%2FBerkeleyMono-Italic.woff2") format("woff2"),
     url("https://pub-e417db9731774f6db4aae3b98e70ba66.r2.dev/fonts%2Fberkeley-mono%2FBerkeleyMono-Italic.woff") format("woff");
@@ -34,6 +37,7 @@
   font-family: "Berkeley Mono";
   font-weight: bold;
   font-style: italic;
+  font-display: swap;
   src:
     url("https://pub-e417db9731774f6db4aae3b98e70ba66.r2.dev/fonts%2Fberkeley-mono%2FBerkeleyMono-BoldItalic.woff2") format("woff2"),
     url("https://pub-e417db9731774f6db4aae3b98e70ba66.r2.dev/fonts%2Fberkeley-mono%2FBerkeleyMono-BoldItalic.woff") format("woff");

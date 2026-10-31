@@ -16,9 +16,9 @@ const { pubDate, description } = post.data;
 >
   <header>
     <a href={article(post.id.replace(/\.md$/, ""))} class="hover:underline">
-      <h4 class="font-bold">
+      <span class="font-bold">
         {post.data.title}
-      </h4>
+      </span>
     </a>
     <span class="cursor-default opacity-75">
       {pubDate ? <FormattedDate date={pubDate} /> : "DRAFT"}
