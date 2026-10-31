@@ -1,6 +1,4 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
-@import "./prose.css";
 @import "./fonts/berkeley-mono.css";
 @import "@fontsource-variable/merriweather";
 
@@ -18,10 +16,6 @@
     "liga" 1,
     "calt" 1;
   /* fix for Chrome */
-}
-
-.expressive-code .frame {
-  box-shadow: unset !important;
 }
 
 :root {

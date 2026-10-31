@@ -11,9 +11,6 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   site: "https://niclasve.me",
   compressHTML: true,
-  build: {
-    inlineStylesheets: "always",
-  },
   prefetch: {
     prefetchAll: true,
   },

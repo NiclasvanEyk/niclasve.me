@@ -6,6 +6,7 @@ import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import SiteContainer from "../components/SiteContainer.astro";
 import { article } from "../links";
+import "../styles/typography.css";
 
 type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 

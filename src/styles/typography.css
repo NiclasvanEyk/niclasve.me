@@ -1,0 +1,13 @@
+/**
+ * Styles that are only needed on pages rendering Markdown through `.prose`.
+ */
+@import "tailwindcss/theme.css" theme(reference);
+@import "tailwindcss/utilities.css" source(none);
+@plugin "@tailwindcss/typography";
+@source inline("prose dark:prose-invert lg:prose-xl");
+@import "./prose.css";
+
+/* expressive-code renders its own frame shadow, ours comes from the theme */
+.expressive-code .frame {
+  box-shadow: unset !important;
+}
