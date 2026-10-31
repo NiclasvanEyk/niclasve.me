@@ -12,7 +12,7 @@ const { pubDate, description } = post.data;
 ---
 
 <li
-  class="-mx-4 block rounded p-4 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900"
+  class="-mx-4 block rounded p-4 transition-colors hover:bg-violet-800/5 dark:hover:bg-violet-400/15"
 >
   <header>
     <a href={article(post.id.replace(/\.md$/, ""))} class="hover:underline">
@@ -23,11 +23,11 @@ const { pubDate, description } = post.data;
     <span class="cursor-default opacity-75">
       {pubDate ? <FormattedDate date={pubDate} /> : "DRAFT"}
     </span>
-    <span
-      class="mx-2 cursor-default select-none align-text-top text-sm opacity-75"
-      >/</span
-    >
-    <span class="cursor-default opacity-75">X minutes read</span>
+    <!-- <span -->
+      <!-- class="mx-2 cursor-default select-none align-text-top text-sm opacity-75" -->
+      <!-- >/</span -->
+    <!-- > -->
+    <!-- <span class="cursor-default opacity-75">X minutes read</span> -->
   </header>
 
   {

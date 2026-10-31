@@ -18,7 +18,7 @@ const posts = (await getCollection("blog", (entry) => entry.data.pubDate)).sort(
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
-  <body class="bg-white text-zinc-900 dark:bg-black dark:text-zinc-200">
+  <body class="text-zinc-900 dark:text-zinc-200">
     <Header page={{ href: article(""), text: "Blog" }} />
     <SiteContainer as="main" class="mt-24 space-y-24">
       <ol>

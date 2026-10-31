@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <title>Blog</title>
+  <style>
+    rect { fill: oklch(81.1% 0.111 293.571); }
+    text { fill: oklch(28.3% 0.141 291.089); }
+    @media (prefers-color-scheme: dark) {
+      rect { fill: oklch(43.2% 0.232 292.759); }
+      text { fill: oklch(94.3% 0.029 294.588); }
+    }
+  </style>
+  <rect width="32" height="32" rx="10" />
+  <text x="16" y="16" text-anchor="middle" dominant-baseline="central" font-family="monospace" font-size="20" font-weight="400">#</text>
+</svg>

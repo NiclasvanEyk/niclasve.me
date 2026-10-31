@@ -1,0 +1,165 @@
+---
+interface Props {
+  text: string;
+  href: string;
+  width?: string;
+  padding?: boolean;
+}
+
+const { text, href, width = "", padding = true } = Astro.props;
+
+const anchor = `hc-${Math.random().toString(36).slice(2, 8)}`;
+const popupId = `${anchor}-popup`;
+---
+
+<span data-hover-card>
+  <a
+    href={href}
+    class="underline cursor-help"
+    style={`anchor-name:--${anchor}`}
+    data-hover-card-trigger>{text}</a
+  >
+
+  <div
+    id={popupId}
+    popover="auto"
+    class:list={[
+      "hover-card-popup bg-zinc-50 dark:bg-zinc-800 rounded-md shadow-md overflow-hidden",
+      width,
+    ]}
+    style={`position-anchor:--${anchor}`}
+    data-hover-card-popup
+  >
+    <div class:list={[padding ? "p-5" : "h-full"]}>
+      <slot />
+    </div>
+  </div>
+</span>
+
+<style>
+  .hover-card-popup {
+    margin: 0;
+    border: none;
+    color: inherit;
+    position-area: top;
+    position-try-fallbacks: flip-block, flip-inline;
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 150ms cubic-bezier(0.16, 0, 0.13, 1),
+      transform 150ms cubic-bezier(0.16, 0, 0.13, 1),
+      display 150ms allow-discrete,
+      overlay 150ms allow-discrete;
+  }
+
+  .hover-card-popup:not(:popover-open) {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  @starting-style {
+    .hover-card-popup:popover-open {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+  }
+
+  @supports not (selector(:popover-open)) {
+    .hover-card-popup {
+      display: none;
+    }
+  }
+
+  @supports not (position-anchor: --a) {
+    .hover-card-popup {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const OPEN_DELAY = 0;
+  const CLOSE_DELAY = 200;
+
+  function setupHoverCards() {
+    if (
+      typeof HTMLElement.prototype.showPopover !== "function" ||
+      !CSS.supports("position-anchor: --a")
+    ) {
+      return;
+    }
+
+    document
+      .querySelectorAll<HTMLElement>("[data-hover-card]")
+      .forEach((card) => {
+        if (card.dataset.hoverCardReady === "true") return;
+        card.dataset.hoverCardReady = "true";
+
+        const trigger = card.querySelector<HTMLAnchorElement>(
+          "[data-hover-card-trigger]",
+        );
+        const popup = card.querySelector<HTMLElement>("[data-hover-card-popup]");
+        if (!trigger || !popup) return;
+
+        let openTimer: number | undefined;
+        let closeTimer: number | undefined;
+
+        const clearOpen = () => {
+          if (openTimer !== undefined) {
+            clearTimeout(openTimer);
+            openTimer = undefined;
+          }
+        };
+        const clearClose = () => {
+          if (closeTimer !== undefined) {
+            clearTimeout(closeTimer);
+            closeTimer = undefined;
+          }
+        };
+        const show = () => {
+          clearClose();
+          if (OPEN_DELAY === 0) {
+            if (!popup.matches(":popover-open")) popup.showPopover();
+            return;
+          }
+          clearOpen();
+          openTimer = window.setTimeout(() => {
+            if (!popup.matches(":popover-open")) popup.showPopover();
+          }, OPEN_DELAY);
+        };
+        const hide = () => {
+          clearOpen();
+          clearClose();
+          closeTimer = window.setTimeout(() => {
+            if (popup.matches(":popover-open")) popup.hidePopover();
+          }, CLOSE_DELAY);
+        };
+
+        trigger.addEventListener("pointerenter", (event) => {
+          if (event.pointerType === "touch") return;
+          show();
+        });
+        trigger.addEventListener("pointerleave", (event) => {
+          if (event.pointerType === "touch") return;
+          hide();
+        });
+        trigger.addEventListener("focus", () => {
+          if (trigger.matches(":focus-visible")) show();
+        });
+        trigger.addEventListener("blur", hide);
+
+        popup.addEventListener("pointerenter", clearClose);
+        popup.addEventListener("pointerleave", hide);
+        popup.addEventListener("focusin", clearClose);
+        popup.addEventListener("focusout", (event) => {
+          if (!popup.contains(event.relatedTarget as Node | null)) hide();
+        });
+      });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupHoverCards);
+  } else {
+    setupHoverCards();
+  }
+</script>

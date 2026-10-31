@@ -1,0 +1,66 @@
+---
+import Icon from "@/components/icons/Icon.astro";
+import { socials, type IconName } from "@/links";
+
+// Brand colors, keyed by the icon shown while hovering.
+const brandHover: Record<IconName, string> = {
+  github: "hover:text-[#181717] dark:hover:text-white",
+  linkedin: "hover:text-[#0A66C2] dark:hover:text-[#378FE9]",
+  x: "hover:text-[#0F1419] dark:hover:text-white",
+  twitter: "hover:text-[#1DA1F2]",
+  envelope: "hover:text-[#EA4335]",
+  rss: "hover:text-[#EE802F]",
+};
+
+// Size of the glyphs and of their clickable area.
+// Change these two to scale the whole row.
+const glyph = "h-10 w-auto";
+const button = "size-14";
+---
+
+<ul class="-mx-2 mt-4 flex flex-wrap items-center gap-1">
+  {
+    socials.map((social) => {
+      const isExternal = social.href.startsWith("http");
+
+      return (
+        <li>
+          <a
+            href={social.href}
+            target={isExternal ? "_blank" : undefined}
+            rel={isExternal ? "me noopener noreferrer" : undefined}
+            class:list={[
+              "group inline-flex items-center justify-center rounded opacity-65 transition hover:bg-blue-800/5 hover:opacity-100 dark:hover:bg-blue-200/10",
+              button,
+              brandHover[social.hoverIcon ?? social.icon],
+            ]}
+          >
+            <span class="grid place-items-center">
+              <Icon
+                name={social.icon}
+                class:list={[
+                  "col-start-1 row-start-1",
+                  glyph,
+                  social.hoverIcon && "transition-opacity group-hover:opacity-0",
+                ]}
+              />
+              {social.hoverIcon && (
+                <Icon
+                  name={social.hoverIcon}
+                  class:list={[
+                    "col-start-1 row-start-1 opacity-0 transition-opacity group-hover:opacity-100",
+                    glyph,
+                  ]}
+                />
+              )}
+            </span>
+            <span class="sr-only">
+              {social.name}
+              {isExternal ? " (opens in a new tab)" : ""}
+            </span>
+          </a>
+        </li>
+      );
+    })
+  }
+</ul>
