@@ -40,3 +40,55 @@ body {
   outline: 2px solid var(--focus-color);
   outline-offset: 3px;
 }
+
+/* Section links share a palette; utilities can still override individual links. */
+@layer base {
+  [data-section="welcome"] {
+    --link-color-light: var(--color-yellow-700);
+    --link-color-dark: var(--color-yellow-500);
+  }
+
+  [data-section="projects"] {
+    --link-color-light: var(--color-red-600);
+    --link-color-dark: var(--color-red-300);
+  }
+
+  [data-section="blog"] {
+    --link-color-light: var(--color-violet-700);
+    --link-color-dark: var(--color-violet-300);
+  }
+
+  [data-section="uses"] {
+    --link-color-light: var(--color-green-700);
+    --link-color-dark: var(--color-green-300);
+  }
+
+  [data-section="socials"] {
+    --link-color-light: var(--color-zinc-900);
+    --link-color-dark: var(--color-zinc-200);
+  }
+
+  [data-section] {
+    --link-color: var(--link-color-light);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    [data-section] {
+      --link-color: var(--link-color-dark);
+    }
+  }
+
+  [data-section] a:hover {
+    color: var(--link-color);
+  }
+}
+
+/* Match the same section as it moves between the page and navigation. */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-group(projects-landmark),
+  ::view-transition-group(blog-landmark),
+  ::view-transition-group(tools-landmark) {
+    animation-duration: 320ms;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}

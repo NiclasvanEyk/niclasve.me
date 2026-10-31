@@ -1,0 +1,46 @@
+---
+interface Props {
+  glyph: string;
+  label?: string;
+  size?: "small" | "medium" | "large";
+  class?: string;
+}
+
+const { glyph, label, size = "small", class: className } = Astro.props;
+const Tag = label ? "button" : "span";
+---
+
+<Tag
+  type={label ? "button" : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : "true"}
+  class:list={[
+    "glyph-badge inline-flex shrink-0 items-center justify-center align-middle font-mono leading-none font-normal tracking-normal",
+    {
+      "size-5 rounded-md text-xs": size === "small",
+      "size-8 rounded-lg text-lg": size === "medium",
+      "size-24 rounded-3xl text-6xl": size === "large",
+    },
+    className,
+  ]}>{glyph}</Tag
+>
+
+<style>
+  button.glyph-badge {
+    cursor: pointer;
+    transform-origin: center;
+    transition: transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  button.glyph-badge:active {
+    transform: scale(1.12, 0.75);
+    transition-duration: 60ms;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    button.glyph-badge {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>

@@ -1,30 +1,20 @@
 ---
-import BaseHead from "@/components/BaseHead.astro";
-import Header from "@/components/Header.astro";
-import Footer from "@/components/Footer.astro";
+import Default from "@/layouts/Default.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
 import BlogPost from "@/components/Homepage/BlogPost.astro";
-import SiteContainer from "@/components/SiteContainer.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
+import { landmarks } from "@/landmarks";
 import { getCollection } from "astro:content";
-import { article } from "@/links";
 
 const posts = (await getCollection("blog", (entry) => entry.data.pubDate)).sort(
   (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
 );
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <body class="text-zinc-900 dark:text-zinc-200">
-    <Header page={{ href: article(""), text: "Blog" }} />
-    <SiteContainer as="main" class="mt-24 space-y-24">
-      <ol>
-        {posts.map((post) => <BlogPost post={post} />)}
-      </ol>
-    </SiteContainer>
-    <Footer />
-  </body>
-</html>
+<Default title="Blog · niclasve.me">
+  <main data-section="blog" class="mt-24 pb-24">
+    <SectionHeading {...landmarks.blog} href={undefined} size="page" />
+    <ol class="mt-6 space-y-4">
+      {posts.map((post) => <BlogPost post={post} />)}
+    </ol>
+  </main>
+</Default>

@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 }
 
 type Props = CollectionEntry<"projects">;
-const { slug, forceTheme } = Astro.params;
+const { slug } = Astro.params;
 
 const projects = await getCollection("projects");
 const project = projects.find((page) => page.id === slug);
@@ -22,15 +22,15 @@ const { github, website } = project.data;
 const { Content } = await render(project);
 ---
 
-<Default forceTheme={project.data.forceTheme}>
-  <main class="mt-24">
+<Default title={project.data.title} description={project.data.description} forceTheme={project.data.forceTheme} section="projects">
+  <main class="mt-24 pb-24">
     <article class="prose dark:prose-invert">
-      <header class="flex flex-row items-center">
-        <h1 class="text-4xl! mb-0! font-extrabold">
+      <header class="flex flex-wrap items-center gap-4">
+        <h1 class="text-3xl! sm:text-4xl! mb-0! font-merriweather font-black! text-green-950! dark:text-green-100!">
           {project.data.title}
         </h1>
 
-        <aside class="ml-auto flex flex-rowa gap-4">
+        <aside class="ml-auto flex shrink-0 flex-row gap-4">
           { website ? (
             <a href={website} title="Homepage">
               <span class="sr-only">Homepage</span>

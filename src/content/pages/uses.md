@@ -1,5 +1,3 @@
-# Tools, Software & Everything Else
-
 I enjoy improving my workflow.
 Inspired by [others](https://uses.tech), I share the tools I use on a day to day basis.
 If you have any suggestions, feel free to [tell me](#TODO).

@@ -12,6 +12,7 @@ export type IconName =
   | "x"
   | "twitter"
   | "envelope"
+  | "status"
   | "rss";
 
 export const socials: ReadonlyArray<{
@@ -46,5 +47,10 @@ export const socials: ReadonlyArray<{
     href: "https://x.com/NiclasvanEijk",
     icon: "x",
     hoverIcon: "twitter",
+  },
+  {
+    name: "Status",
+    href: "https://status.niclasve.me",
+    icon: "status",
   },
 ];

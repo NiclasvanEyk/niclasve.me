@@ -3,6 +3,7 @@
 // all pages through the use of the <BaseHead /> component.
 import "../styles/global.css";
 import { SITE_TITLE } from "@/consts";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
   title: string;
@@ -13,7 +14,7 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const section = Astro.url.pathname.split("/")[1];
 const favicon =
-  section === "blog" || section === "projects"
+  section === "blog" || section === "projects" || section === "uses"
     ? `/favicon-${section}.svg`
     : "/favicon.svg";
 
@@ -21,6 +22,7 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 ---
 
 <!-- Global Metadata -->
+<ClientRouter fallback="swap" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href={favicon} />

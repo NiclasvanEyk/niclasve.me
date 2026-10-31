@@ -1,20 +1,22 @@
 ---
 import { SITE_TITLE } from "../consts";
+import SectionHeading from "./SectionHeading.astro";
+import { landmarks, type Landmark } from "@/landmarks";
 
 interface Props {
   root?: true;
-  page?: {
-    href: string;
-    text: string;
-  };
+  section?: Landmark;
 }
 
-const { page, root } = Astro.props;
+const { section, root } = Astro.props;
 const titleClasses = "py-3 text-zinc-900/80 dark:text-zinc-100/60";
 ---
 
 <header class="flex flex-row place-content-center">
-  <nav class="flex w-full max-w-3xl items-center">
+  <nav
+    aria-label="Main"
+    class="flex w-full max-w-3xl flex-wrap items-center gap-x-3"
+  >
     {
       root ? (
         <span class:list={[titleClasses, "cursor-default"]}>{SITE_TITLE}</span>
@@ -26,12 +28,12 @@ const titleClasses = "py-3 text-zinc-900/80 dark:text-zinc-100/60";
     }
 
     {
-      typeof page !== "object" ? null : (
+      section && (
         <>
-          <span class="divider mx-1">/</span>
-          <a href={page.href} class="sub-site">
-            {page.text}
-          </a>
+          <span aria-hidden="true" class="text-zinc-400 dark:text-zinc-600">
+            ⋅
+          </span>
+          <SectionHeading {...landmarks[section]} size="nav" />
         </>
       )
     }

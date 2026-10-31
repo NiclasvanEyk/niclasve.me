@@ -1,5 +1,7 @@
 ---
 import Default from "@/layouts/Default.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import { landmarks } from "@/landmarks";
 import { project as projectPage } from "@/links";
 import { format } from "date-fns";
 import { getCollection } from "astro:content";
@@ -9,9 +11,9 @@ const projects = (await getCollection("projects")).sort(
 );
 ---
 
-<Default>
-  <main>
-    <h1 class="mb-3 mt-24 text-2xl font-extrabold">Projects</h1>
+<Default title="Projects · niclasve.me">
+  <main data-section="projects" class="mt-24 pb-24">
+    <SectionHeading {...landmarks.projects} href={undefined} size="page" />
 
     <p class="my-3">
       This is basically a cleaner version of <a
@@ -26,7 +28,7 @@ const projects = (await getCollection("projects")).sort(
         {
           projects.map((project) => (
             <tr>
-              <td class="py-1 align-top tabular-nums opacity-50">
+              <td class="whitespace-nowrap py-1 align-top tabular-nums opacity-50">
                 {format(project.data.startedAt, "yyyy-MM-dd")}
               </td>
               <td class="px-3 py-1">

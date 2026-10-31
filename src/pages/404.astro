@@ -1,12 +1,25 @@
 ---
-import Section from "@/components/Homepage/Section.astro";
+import GlyphBadge from "@/components/GlyphBadge.astro";
 import Default from "@/layouts/Default.astro";
 ---
 
-<Default>
-  <main class="space-y-24">
-    <Section heading="Not Found" class="mt-24">
-      <p>This page does not seem to exist.</p>
-    </Section>
+<Default title="Not Found · niclasve.me">
+  <main class="mt-24 pb-24">
+    <GlyphBadge
+      glyph="?"
+      label="A very confused badge"
+      size="large"
+      class="bg-red-300 text-red-950 dark:bg-red-800 dark:text-red-100"
+    />
+    <p class="mt-8 font-mono text-sm text-red-800 dark:text-red-300">404</p>
+    <h1
+      class="font-merriweather mt-2 text-3xl font-black tracking-tight text-red-950 dark:text-red-100"
+    >
+      Not Found
+    </h1>
+    <p class="mt-3">This page does not seem to exist.</p>
+    <a href="/" class="mt-6 inline-block underline underline-offset-4"
+      >Back to the homepage</a
+    >
   </main>
 </Default>

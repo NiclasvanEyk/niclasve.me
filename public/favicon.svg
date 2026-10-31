@@ -4,8 +4,8 @@
     rect { fill: oklch(90.5% 0.182 98.111); }
     text { fill: oklch(28.6% 0.066 53.813); }
     @media (prefers-color-scheme: dark) {
-      rect { fill: oklch(47.6% 0.114 61.907); }
-      text { fill: oklch(97.3% 0.071 103.193); }
+      rect { fill: oklch(79.5% 0.184 86.047); }
+      text { fill: #171716; }
     }
   </style>
   <rect width="32" height="32" rx="10" />

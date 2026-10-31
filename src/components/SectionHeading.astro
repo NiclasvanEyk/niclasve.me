@@ -1,0 +1,62 @@
+---
+import GlyphBadge from "./GlyphBadge.astro";
+
+interface Props {
+  heading: string;
+  headingClass?: string;
+  href?: string;
+  glyph?: string;
+  glyphClass?: string;
+  size?: "section" | "page" | "nav";
+  transitionName?: string;
+}
+
+const {
+  heading,
+  headingClass,
+  href,
+  glyph,
+  glyphClass,
+  size = "section",
+  transitionName,
+} = Astro.props;
+const Wrapper = size === "nav" ? "a" : "div";
+const Heading = size === "page" ? "h1" : size === "nav" ? "span" : "h2";
+---
+
+<Wrapper
+  href={size === "nav" ? href : undefined}
+  class:list={[
+    "group font-merriweather flex w-fit max-w-full items-center",
+    size === "page" ? "gap-3 text-2xl" : "gap-2 text-base",
+  ]}
+  transition:name={transitionName}
+>
+  {
+    glyph && (
+      <GlyphBadge
+        glyph={glyph}
+        label={size === "nav" ? undefined : `${heading} badge`}
+        size={size === "page" ? "medium" : "small"}
+        class={glyphClass ?? "opacity-75"}
+      />
+    )
+  }
+  <Heading
+    class:list={[
+      "font-black tracking-tight opacity-95",
+      size === "nav" && "group-hover:underline",
+      headingClass,
+    ]}
+  >
+    {
+      href && size !== "nav" ? (
+        <a href={href} class="text-inherit hover:underline">
+          {heading}
+        </a>
+      ) : (
+        heading
+      )
+    }
+  </Heading>
+</Wrapper>

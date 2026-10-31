@@ -157,9 +157,5 @@ const popupId = `${anchor}-popup`;
       });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", setupHoverCards);
-  } else {
-    setupHoverCards();
-  }
+  document.addEventListener("astro:page-load", setupHoverCards);
 </script>

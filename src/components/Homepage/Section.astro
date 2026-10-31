@@ -1,5 +1,7 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import SectionHeading from "@/components/SectionHeading.astro";
+import type { Landmark } from "@/landmarks";
 
 type Props = HTMLAttributes<"section"> & {
   heading: string;
@@ -7,60 +9,36 @@ type Props = HTMLAttributes<"section"> & {
   href?: string;
   glyph?: string;
   glyphClass?: string;
+  transitionName?: string;
+  section?: Landmark | "welcome" | "socials";
 };
 
-const { heading, headingClass, glyph, glyphClass, href, class: className, ...props } = Astro.props;
+const {
+  heading,
+  headingClass,
+  glyph,
+  glyphClass,
+  href,
+  transitionName,
+  section,
+  class: className,
+  ...props
+} = Astro.props;
 ---
 
-<section class:list={[className]} {...props}>
-  <header
-    class="mb-1 font-merriweather text-md font-medium tracking-wide flex flex-row items-center gap-1"
-  >
-    {
-      glyph ? (
-        <button
-          type="button"
-          class:list={[
-            "section-badge mr-1 inline-flex size-5 items-center justify-center rounded-md align-middle font-mono text-xs font-normal leading-none tracking-normal",
-            glyphClass ?? "opacity-75",
-          ]}
-          aria-label={`${heading} badge`}
-        >
-          {glyph}
-        </button>
-      ) : null
-    }
-    <h2 class:list={["font-black tracking-tight opacity-95", headingClass]}>
-    {
-      href ? (
-        <a href={href} class="hover:underline">
-          {heading}
-        </a>
-      ) : heading
-    }
-    </h2>
+<section data-section={section} class:list={[className]} {...props}>
+  <header class="mb-1">
+    <SectionHeading
+      {heading}
+      {headingClass}
+      {glyph}
+      {glyphClass}
+      {href}
+      {transitionName}
+    />
   </header>
 
   <div class="text-base">
     <slot />
   </div>
 </section>
-
-<style>
-  .section-badge {
-    cursor: pointer;
-    transform-origin: center;
-    transition: transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  .section-badge:active {
-    transform: scale(1.12, 0.75);
-    transition-duration: 60ms;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .section-badge {
-      transition: none;
-    }
-  }
-</style>
