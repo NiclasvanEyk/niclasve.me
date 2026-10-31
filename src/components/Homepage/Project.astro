@@ -14,7 +14,7 @@ const { project } = Astro.props;
 >
   <a
     href={projectPage(project.id.replace(/\.md$/, ""))}
-    class="relative font-bold group-hover:underline"
+    class="relative block font-bold group-hover:underline"
   >
     <h4>
       {project.data.title}

@@ -1,0 +1,37 @@
+---
+import logoLight from "./employer-logo.light.svg?url";
+import logoDark from "./employer-logo.dark.svg?url";
+import HoverCard from "./HoverCard.astro";
+---
+
+<HoverCard
+  text="Team Internet"
+  href="https://en.wikipedia.org/wiki/Team_Internet"
+  width="w-[500px]"
+>
+  <div class="flex flex-col gap-10">
+    <picture>
+      <source srcset={logoLight} media="(prefers-color-scheme: light)" />
+      <img src={logoDark} alt="Team Internet" />
+    </picture>
+
+    <blockquote class="break-words border-l pl-2 font-sans text-sm italic">
+      Team Internet Group PLC (formerly named CentralNic Group PLC) is a British
+      multinational internet services holding company headquartered in London,
+      United Kingdom. Its subsidiaries provide services categorized in two
+      segments: Online Marketing and Online Presence. The Online Marketing
+      segment offers services and products in digital advertising, domain
+      monetization, traffic commerce and product comparison; the Online Presence
+      segment provide domain name registry and registrar services, in addition
+      to associated products and services, including web hosting, brand
+      management, and domain parking.
+    </blockquote>
+
+    <div class="flex flex-row items-center justify-between">
+      <a href="https://en.wikipedia.org/wiki/Team_Internet" class="underline">
+        Wikipedia
+      </a>
+      <a href="https://teaminternet.com" class="underline">Homepage</a>
+    </div>
+  </div>
+</HoverCard>

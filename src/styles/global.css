@@ -2,6 +2,7 @@
 @plugin "@tailwindcss/typography";
 @import "./prose.css";
 @import "./fonts/berkeley-mono.css";
+@import "@fontsource-variable/merriweather";
 
 @theme {
   /* Font Family */
@@ -9,73 +10,14 @@
     "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
 
-  /* Custom Animations */
-  --animate-slide-up-and-fade: slideUpAndFade 300ms
-    cubic-bezier(0.16, 0, 0.13, 1);
-  --animate-slide-down-and-fade: slideDownAndFade 300ms
-    cubic-bezier(0.16, 0, 0.13, 1);
-  --animate-slide-right-and-fade: slideRightAndFade 300ms
-    cubic-bezier(0.16, 0, 0.13, 1);
-  --animate-slide-left-and-fade: slideLeftAndFade 300ms
-    cubic-bezier(0.16, 0, 0.13, 1);
-
-  @keyframes slideUpAndFade {
-    0% {
-      opacity: 0;
-      transform: translateY(2px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes slideDownAndFade {
-    0% {
-      opacity: 0;
-      transform: translateY(-2px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes slideRightAndFade {
-    0% {
-      opacity: 0;
-      transform: translateX(-2px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes slideLeftAndFade {
-    0% {
-      opacity: 0;
-      transform: translateX(2px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
+  --font-merriweather: "Merriweather Variable", serif; 
 }
 
 :root {
-  font-family: Inter, sans-serif;
   font-feature-settings:
     "liga" 1,
     "calt" 1;
   /* fix for Chrome */
-}
-
-@supports (font-variation-settings: normal) {
-  :root {
-    font-family: InterVariable, sans-serif;
-  }
 }
 
 .expressive-code .frame {
@@ -84,9 +26,16 @@
 
 :root {
   --site-container-width: 720px;
+  --focus-color: var(--color-blue-600);
 }
 
-body {
-  margin: 0;
-  padding: 0;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --focus-color: var(--color-blue-400);
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-color);
+  outline-offset: 3px;
 }
