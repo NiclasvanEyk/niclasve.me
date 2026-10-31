@@ -27,12 +27,19 @@
 :root {
   --site-container-width: 720px;
   --focus-color: var(--color-blue-600);
+  --page-background: #faf9f6;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --focus-color: var(--color-blue-400);
+    --page-background: #171716;
   }
+}
+
+body {
+  min-height: 100svh;
+  background-color: var(--page-background);
 }
 
 :focus-visible {
