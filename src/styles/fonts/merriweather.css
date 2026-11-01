@@ -1,0 +1,9 @@
+/* Only bundle Fontsource's Latin subset; its default CSS includes all scripts. */
+@font-face {
+  font-family: "Merriweather Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 900;
+  src: url("@fontsource-variable/merriweather/files/merriweather-latin-wght-normal.woff2")
+    format("woff2-variations");
+}

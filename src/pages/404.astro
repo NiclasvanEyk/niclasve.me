@@ -4,16 +4,15 @@ import Default from "@/layouts/Default.astro";
 ---
 
 <Default title="Not Found · niclasve.me" image="/og/home.png">
-  <main class="mt-24 pb-24">
+  <main data-section="not-found" class="mt-24 pb-24">
     <GlyphBadge
-      glyph="?"
+      theme="notFound"
       label="A very confused badge"
       size="large"
-      class="bg-red-300 text-red-950 dark:bg-red-800 dark:text-red-100"
     />
-    <p class="mt-8 font-mono text-sm text-red-800 dark:text-red-300">404</p>
+    <p class="mt-8 font-mono text-sm text-[var(--link-color)]">404</p>
     <h1
-      class="font-merriweather mt-2 text-3xl font-black tracking-tight text-red-950 dark:text-red-100"
+      class="font-merriweather mt-2 text-3xl font-black tracking-tight section-heading"
     >
       Not Found
     </h1>

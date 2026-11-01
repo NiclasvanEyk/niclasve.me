@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "./fonts/berkeley-mono.css";
-@import "@fontsource-variable/merriweather";
+@import "./fonts/merriweather.css";
 
 @theme {
   /* Font Family */
@@ -8,7 +8,7 @@
     "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
 
-  --font-merriweather: "Merriweather Variable", serif; 
+  --font-merriweather: "Merriweather Variable", serif;
 }
 
 :root {
@@ -21,13 +21,11 @@
 :root {
   --site-container-width: 720px;
   --focus-color: var(--color-blue-600);
-  --page-background: #faf9f6;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --focus-color: var(--color-blue-400);
-    --page-background: #171716;
   }
 }
 
@@ -41,46 +39,21 @@ body {
   outline-offset: 3px;
 }
 
-/* Section links share a palette; utilities can still override individual links. */
+/* Section palettes are generated from theme.ts at /theme.css. */
 @layer base {
-  [data-section="welcome"] {
-    --link-color-light: var(--color-yellow-700);
-    --link-color-dark: var(--color-yellow-500);
-  }
-
-  [data-section="projects"] {
-    --link-color-light: var(--color-red-600);
-    --link-color-dark: var(--color-red-300);
-  }
-
-  [data-section="blog"] {
-    --link-color-light: var(--color-violet-700);
-    --link-color-dark: var(--color-violet-300);
-  }
-
-  [data-section="uses"] {
-    --link-color-light: var(--color-green-700);
-    --link-color-dark: var(--color-green-300);
-  }
-
-  [data-section="socials"] {
-    --link-color-light: var(--color-zinc-900);
-    --link-color-dark: var(--color-zinc-200);
-  }
-
-  [data-section] {
-    --link-color: var(--link-color-light);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    [data-section] {
-      --link-color: var(--link-color-dark);
-    }
-  }
-
   [data-section] a:hover {
     color: var(--link-color);
   }
+
+  [data-section] ::selection {
+    background-color: var(--selection-background);
+    color: var(--selection-foreground);
+  }
+}
+
+.section-heading,
+.prose .section-heading {
+  color: var(--heading-color);
 }
 
 /* Match the same section as it moves between the page and navigation. */

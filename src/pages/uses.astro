@@ -1,7 +1,6 @@
 ---
 import Default from "@/layouts/Default.astro";
 import SectionHeading from "@/components/SectionHeading.astro";
-import { landmarks } from "@/landmarks";
 import * as content from "../content/pages/uses.md";
 import "../styles/typography.css";
 
@@ -9,12 +8,8 @@ const { Content } = content;
 ---
 
 <Default title="Uses · niclasve.me">
-  <main data-section="tools" class="mt-24 pb-24 [--focus-color:var(--color-emerald-600)] dark:[--focus-color:var(--color-emerald-400)] selection:bg-emerald-200 selection:text-emerald-950 dark:selection:bg-emerald-800 dark:selection:text-emerald-100">
-    <SectionHeading
-      {...landmarks.tools}
-      href={undefined}
-      size="page"
-    />
+  <main data-section="uses" class="mt-24 pb-24">
+    <SectionHeading theme="tools" size="page" />
     <div class="prose dark:prose-invert mt-6">
       <Content />
     </div>

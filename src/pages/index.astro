@@ -7,7 +7,6 @@ import Default from "@/layouts/Default.astro";
 import Location from "@/components/Homepage/HoverCards/Location.astro";
 import Employer from "@/components/Homepage/HoverCards/Employer.astro";
 import { getCollection, getEntry } from "astro:content";
-import { landmarks } from "@/landmarks";
 
 const latestBlogPosts = (
   await getCollection("blog", (entry) => entry.data.pubDate)
@@ -31,14 +30,7 @@ const selectedProjects = [
 
 <Default root>
   <main class="space-y-12 pb-24">
-    <Section
-      glyph="~"
-      glyphClass="bg-yellow-300 text-yellow-950 dark:bg-yellow-500 dark:text-[var(--page-background)]"
-      heading="Welcome"
-      section="welcome"
-      headingClass="text-yellow-700 dark:text-yellow-100"
-      class="mt-24 pb-4 [--focus-color:var(--color-yellow-600)] dark:[--focus-color:var(--color-yellow-400)] selection:bg-yellow-200 selection:text-yellow-950 dark:selection:bg-yellow-800 dark:selection:text-yellow-100"
-    >
+    <Section theme="welcome" class="mt-24 pb-4">
       <div>
         My name is Niclas.
         I live in <Location /> and work for <Employer /> as a developer.
@@ -50,10 +42,7 @@ const selectedProjects = [
       </div>
     </Section>
 
-    <Section
-      {...landmarks.projects}
-      class="[--focus-color:var(--color-green-600)] dark:[--focus-color:var(--color-green-400)] selection:bg-green-200 selection:text-green-950 dark:selection:bg-green-800 dark:selection:text-green-100"
-    >
+    <Section theme="projects">
       <p>
         A list of my personal side projects. There is also exists <a class="underline" href="/projects">an overview of all of them</a >.
       </p>
@@ -63,10 +52,7 @@ const selectedProjects = [
       </ul>
     </Section>
 
-    <Section
-      {...landmarks.blog}
-      class="[--focus-color:var(--color-violet-600)] dark:[--focus-color:var(--color-violet-400)] selection:bg-violet-200 selection:text-violet-950 dark:selection:bg-violet-800 dark:selection:text-violet-100"
-    >
+    <Section theme="blog">
       <p>Not much to see here, yet.</p>
 
       <ol class="mt-4 space-y-2">
@@ -75,23 +61,13 @@ const selectedProjects = [
     </Section>
 
     <div class="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2">
-      <Section
-        {...landmarks.tools}
-        class="[--focus-color:var(--color-emerald-600)] dark:[--focus-color:var(--color-emerald-400)] selection:bg-emerald-200 selection:text-emerald-950 dark:selection:bg-emerald-800 dark:selection:text-emerald-100"
-      >
+      <Section theme="tools">
         <p>
           Inspired by the <a href="https://uses.tech" class="underline underline-offset-2"><code class="rounded bg-emerald-950/5 px-1 py-0.5 font-mono text-sm dark:bg-emerald-100/10">/uses</code></a> movement, I share <a class="underline" href="/uses">the tools and software I use every day</a>.
         </p>
       </Section>
 
-      <Section
-        glyph="@"
-        glyphClass="bg-blue-300 text-blue-950 dark:bg-blue-800 dark:text-blue-100"
-        heading="Socials"
-        section="socials"
-        headingClass="text-blue-900 dark:text-blue-50"
-        class="[--focus-color:var(--color-blue-600)] dark:[--focus-color:var(--color-blue-400)] selection:bg-blue-200 selection:text-blue-950 dark:selection:bg-blue-800 dark:selection:text-blue-100"
-      >
+      <Section theme="socials">
         <p>Links to my profiles in various corners of the internet.</p>
         <Socials />
       </Section>

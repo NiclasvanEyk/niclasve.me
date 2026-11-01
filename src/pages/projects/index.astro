@@ -1,7 +1,6 @@
 ---
 import Default from "@/layouts/Default.astro";
 import SectionHeading from "@/components/SectionHeading.astro";
-import { landmarks } from "@/landmarks";
 import { project as projectPage } from "@/links";
 import { format } from "date-fns";
 import { getCollection } from "astro:content";
@@ -13,7 +12,7 @@ const projects = (await getCollection("projects")).sort(
 
 <Default title="Projects · niclasve.me">
   <main data-section="projects" class="mt-24 pb-24">
-    <SectionHeading {...landmarks.projects} href={undefined} size="page" />
+    <SectionHeading theme="projects" size="page" />
 
     <p class="my-3">
       This is basically a cleaner version of <a

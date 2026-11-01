@@ -1,30 +1,20 @@
 ---
 import GlyphBadge from "./GlyphBadge.astro";
+import { themes, type ThemeName, type SectionTheme } from "@/theme";
 
 interface Props {
-  heading: string;
-  headingClass?: string;
-  href?: string;
-  glyph?: string;
-  glyphClass?: string;
+  theme: ThemeName;
   size?: "section" | "page" | "nav";
-  transitionName?: string;
 }
 
-const {
-  heading,
-  headingClass,
-  href,
-  glyph,
-  glyphClass,
-  size = "section",
-  transitionName,
-} = Astro.props;
+const { theme, size = "section" } = Astro.props;
+const { heading, href, section, transitionName }: SectionTheme = themes[theme];
 const Wrapper = size === "nav" ? "a" : "div";
 const Heading = size === "page" ? "h1" : size === "nav" ? "span" : "h2";
 ---
 
 <Wrapper
+  data-section={section}
   href={size === "nav" ? href : undefined}
   class:list={[
     "group font-merriweather flex w-fit max-w-full items-center",
@@ -32,25 +22,19 @@ const Heading = size === "page" ? "h1" : size === "nav" ? "span" : "h2";
   ]}
   transition:name={transitionName}
 >
-  {
-    glyph && (
-      <GlyphBadge
-        glyph={glyph}
-        label={size === "nav" ? undefined : `${heading} badge`}
-        size={size === "page" ? "medium" : "small"}
-        class={glyphClass ?? "opacity-75"}
-      />
-    )
-  }
+  <GlyphBadge
+    {theme}
+    label={size === "nav" ? undefined : `${heading} badge`}
+    size={size === "page" ? "medium" : "small"}
+  />
   <Heading
     class:list={[
-      "font-black tracking-tight opacity-95",
+      "section-heading font-black tracking-tight opacity-95",
       size === "nav" && "group-hover:underline",
-      headingClass,
     ]}
   >
     {
-      href && size !== "nav" ? (
+      href && size === "section" ? (
         <a href={href} class="text-inherit hover:underline">
           {heading}
         </a>

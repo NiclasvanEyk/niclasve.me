@@ -1,41 +1,22 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import SectionHeading from "@/components/SectionHeading.astro";
-import type { Landmark } from "@/landmarks";
+import { themes, type ThemeName } from "@/theme";
 
 type Props = HTMLAttributes<"section"> & {
-  heading: string;
-  headingClass?: string;
-  href?: string;
-  glyph?: string;
-  glyphClass?: string;
-  transitionName?: string;
-  section?: Landmark | "welcome" | "socials";
+  theme: ThemeName;
 };
 
-const {
-  heading,
-  headingClass,
-  glyph,
-  glyphClass,
-  href,
-  transitionName,
-  section,
-  class: className,
-  ...props
-} = Astro.props;
+const { theme, class: className, ...props } = Astro.props;
 ---
 
-<section data-section={section} class:list={[className]} {...props}>
+<section
+  data-section={themes[theme].section}
+  class:list={[className]}
+  {...props}
+>
   <header class="mb-1">
-    <SectionHeading
-      {heading}
-      {headingClass}
-      {glyph}
-      {glyphClass}
-      {href}
-      {transitionName}
-    />
+    <SectionHeading {theme} />
   </header>
 
   <div class="text-base">

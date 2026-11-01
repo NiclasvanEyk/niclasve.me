@@ -1,49 +1,5 @@
 import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH, SITE_TITLE } from "@/consts";
-import { landmarks } from "@/landmarks";
-
-/**
- * The visual identity of the OpenGraph images mirrors the glyph badges from
- * `landmarks.ts`. Satori only understands inline styles, so the Tailwind
- * classes of the badges cannot be reused directly and the colors are spelled
- * out here instead. These are the light-mode variants of the site.
- *
- * OpenGraph images cannot follow `prefers-color-scheme`, so this is a single
- * fixed scheme; swap the values for their `dark:` counterparts to flip it.
- */
-const themes = {
-  welcome: {
-    glyph: "~",
-    badgeBackground: "#fde047",
-    badgeForeground: "#422006",
-    heading: "#a16207",
-  },
-  projects: {
-    glyph: landmarks.projects.glyph,
-    badgeBackground: "#991b1b",
-    badgeForeground: "#fee2e2",
-    heading: "#450a0a",
-  },
-  blog: {
-    glyph: landmarks.blog.glyph,
-    badgeBackground: "#c4b5fd",
-    badgeForeground: "#2e1065",
-    heading: "#4c1d95",
-  },
-  tools: {
-    glyph: landmarks.tools.glyph,
-    badgeBackground: "#000000",
-    badgeForeground: "#4ade80",
-    heading: "#052e16",
-  },
-  socials: {
-    glyph: "@",
-    badgeBackground: "#93c5fd",
-    badgeForeground: "#172554",
-    heading: "#1e3a8a",
-  },
-} as const;
-
-export type ThemeName = keyof typeof themes;
+import { themes, pageColors, type ThemeName } from "@/theme";
 
 export type Card =
   | { variant: "home" }
@@ -58,12 +14,8 @@ export type Card =
       description?: string;
     };
 
-const colors = {
-  background: "#faf9f6",
-  foreground: "#18181b",
-  muted: "#52525b",
-  subtle: "#71717a",
-} as const;
+// Cards use the light palette because preview images cannot follow system theme.
+const colors = pageColors.light;
 
 type Props = Record<string, unknown> & { style?: Record<string, unknown> };
 type Element = { type: string; props: Props };
@@ -85,7 +37,10 @@ function el(type: string, props: Props, ...children: unknown[]): Element {
 }
 
 function badge(theme: ThemeName, size: number, fontSize: number): Element {
-  const { glyph, badgeBackground, badgeForeground } = themes[theme];
+  const {
+    glyph,
+    light: { badgeBackground, badgeForeground },
+  } = themes[theme];
 
   return el(
     "div",
@@ -214,7 +169,7 @@ function homeCard(): Element {
 }
 
 function pageCard(card: Extract<Card, { variant: "page" }>): Element {
-  const { heading } = themes[card.theme];
+  const { heading } = themes[card.theme].light;
   const eyebrow = card.eyebrow?.toUpperCase();
 
   const header = el(

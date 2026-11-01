@@ -2,7 +2,6 @@
 import Default from "@/layouts/Default.astro";
 import SectionHeading from "@/components/SectionHeading.astro";
 import BlogPost from "@/components/Homepage/BlogPost.astro";
-import { landmarks } from "@/landmarks";
 import { getCollection } from "astro:content";
 
 const posts = (await getCollection("blog", (entry) => entry.data.pubDate)).sort(
@@ -12,7 +11,7 @@ const posts = (await getCollection("blog", (entry) => entry.data.pubDate)).sort(
 
 <Default title="Blog · niclasve.me">
   <main data-section="blog" class="mt-24 pb-24">
-    <SectionHeading {...landmarks.blog} href={undefined} size="page" />
+    <SectionHeading theme="blog" size="page" />
     <ol class="mt-6 space-y-4">
       {posts.map((post) => <BlogPost post={post} />)}
     </ol>

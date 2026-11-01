@@ -1,11 +1,11 @@
 ---
 import { SITE_TITLE } from "../consts";
 import SectionHeading from "./SectionHeading.astro";
-import { landmarks, type Landmark } from "@/landmarks";
+import type { ThemeName } from "@/theme";
 
 interface Props {
   root?: true;
-  section?: Landmark;
+  section?: ThemeName;
 }
 
 const { section, root } = Astro.props;
@@ -33,7 +33,7 @@ const titleClasses = "py-3 text-zinc-900/80 dark:text-zinc-100/60";
           <span aria-hidden="true" class="text-zinc-400 dark:text-zinc-600">
             ⋅
           </span>
-          <SectionHeading {...landmarks[section]} size="nav" />
+          <SectionHeading theme={section} size="nav" />
         </>
       )
     }

@@ -2,7 +2,7 @@
 import BaseHead from "@/components/BaseHead.astro";
 import Header from "@/components/Header.astro";
 import SiteContainer from "@/components/SiteContainer.astro";
-import type { Landmark } from "@/landmarks";
+import { themes, type ThemeName } from "@/theme";
 
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
@@ -12,7 +12,7 @@ interface Props {
   image?: string;
   root?: true;
   forceTheme?: "light" | "dark";
-  section?: Landmark;
+  section?: ThemeName;
 }
 
 const props = Astro.props;
@@ -47,7 +47,7 @@ if (props.forceTheme) {
   <body class="px-6 text-zinc-900 xl:px-0 dark:text-zinc-200">
     <Header root={props.root} section={props.section} />
 
-    <SiteContainer data-section={props.section}>
+    <SiteContainer data-section={props.section && themes[props.section].section}>
       <slot />
     </SiteContainer>
   </body>

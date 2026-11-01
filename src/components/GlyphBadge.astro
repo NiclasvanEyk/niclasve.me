@@ -1,16 +1,20 @@
 ---
+import { themes, type ThemeName } from "@/theme";
+
 interface Props {
-  glyph: string;
+  theme: ThemeName;
   label?: string;
   size?: "small" | "medium" | "large";
   class?: string;
 }
 
-const { glyph, label, size = "small", class: className } = Astro.props;
+const { theme, label, size = "small", class: className } = Astro.props;
+const { glyph, section } = themes[theme];
 const Tag = label ? "button" : "span";
 ---
 
 <Tag
+  data-section={section}
   type={label ? "button" : undefined}
   aria-label={label}
   aria-hidden={label ? undefined : "true"}
@@ -26,6 +30,11 @@ const Tag = label ? "button" : "span";
 >
 
 <style>
+  .glyph-badge {
+    background-color: var(--glyph-background);
+    color: var(--glyph-foreground);
+  }
+
   button.glyph-badge {
     cursor: pointer;
     transform-origin: center;
