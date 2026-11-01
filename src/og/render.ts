@@ -29,9 +29,9 @@ const fonts = [
  * Both steps only run during `astro build`.
  */
 export async function renderCardPng(card: Card): Promise<Uint8Array> {
-  // Satori types expect React elements, but it only needs the plain
-  // `{ type, props }` shape that `renderCard` builds.
-  const svg = await satori(renderCard(card) as never, {
+  // Satori's public signature uses React types; its built-in JSX runtime
+  // produces compatible elements without requiring React.
+  const svg = await satori(renderCard(card) as Parameters<typeof satori>[0], {
     width: OG_IMAGE_WIDTH,
     height: OG_IMAGE_HEIGHT,
     fonts,
