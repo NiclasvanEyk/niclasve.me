@@ -9,12 +9,21 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
   root?: true;
   forceTheme?: "light" | "dark";
   section?: Landmark;
 }
 
 const props = Astro.props;
+
+// OpenGraph cards are generated at build time in `/og`, mirroring the page
+// path: `/projects/keepac` -> `/og/projects/keepac.png`. Pages without a card
+// (like the 404 page) pass an explicit `image`.
+const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const image =
+  props.image ?? (pathname === "/" ? "/og/home.png" : `/og${pathname}.png`);
+
 let htmlAttrs = {};
 
 if (props.forceTheme) {
@@ -32,11 +41,10 @@ if (props.forceTheme) {
     <BaseHead
       title={props.title ?? SITE_TITLE}
       description={props.description ?? SITE_DESCRIPTION}
+      {image}
     />
   </head>
-  <body
-    class="px-6 text-zinc-900 xl:px-0 dark:text-zinc-200"
-  >
+  <body class="px-6 text-zinc-900 xl:px-0 dark:text-zinc-200">
     <Header root={props.root} section={props.section} />
 
     <SiteContainer data-section={props.section}>

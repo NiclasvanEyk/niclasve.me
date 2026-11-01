@@ -1,0 +1,38 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      # Installs Node and aube from mise.toml / mise.lock, and caches them.
+      - uses: actions/checkout@v7
+      - uses: jdx/mise-action@v5
+        id: mise
+
+      # aube reads and writes package-lock.json, so the existing lockfile stays
+      # authoritative. Only its download store is worth caching; node_modules
+      # is re-materialised from it on every run.
+      - uses: actions/cache@v6
+        with:
+          path: |
+            ~/.cache/aube
+            ~/.local/share/aube/store
+          key: aube-${{ runner.os }}-${{ steps.mise.outputs.aube }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            aube-${{ runner.os }}-${{ steps.mise.outputs.aube }}-
+
+      - run: aube ci
+      - run: mise run test

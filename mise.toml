@@ -8,6 +8,10 @@ aube = "latest"
 description = "Build the project for production"
 run = "aube run build"
 
+[tasks.test]
+description = "Build the project and verify the generated pages"
+run = "aube run test"
+
 [tasks.dev]
 description = "Start the dev server"
 run = "aube run dev"
