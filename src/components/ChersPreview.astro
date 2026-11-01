@@ -1,0 +1,70 @@
+---
+import { Image } from "astro:assets";
+import preview from "@/assets/chers-preview.png";
+
+interface Props {
+  url: string;
+  description: string;
+}
+
+const { url, description } = Astro.props;
+---
+
+<chers-preview class="not-prose my-8 block">
+  <!-- Chers renders a square board up to 512px wide. Leave room for settings. -->
+  <div
+    class="h-[min(calc(100vw+16px),576px)] overflow-hidden rounded-xl border border-current/15 bg-black"
+  >
+    <a
+      class="group relative grid size-full place-items-center focus-visible:outline-3 focus-visible:-outline-offset-6 focus-visible:outline-white"
+      href={url}
+      data-launch
+      aria-label="Play Chers here"
+    >
+      <Image
+        class="absolute size-full object-cover"
+        src={preview}
+        alt="Chers chessboard with the pieces in their starting positions."
+        widths={[480, 768, 1280]}
+        sizes="(max-width: 816px) calc(100vw - 48px), 768px"
+        loading="eager"
+      />
+      <span
+        class="relative flex items-center gap-[0.65rem] rounded-full border border-white/25 bg-[#18181bee] px-[1.2rem] py-[0.8rem] font-semibold text-white shadow-[0_4px_24px_#0006] group-hover:bg-zinc-800"
+        ><span aria-hidden="true">▶</span> Play</span
+      >
+    </a>
+  </div>
+  <div class="mt-3 flex flex-wrap justify-between gap-x-4 gap-y-2 text-sm">
+    <span class="opacity-65">{description}</span>
+    <a
+      class="hover:underline"
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer">Open Chers <span aria-hidden="true">↗</span></a
+    >
+  </div>
+</chers-preview>
+
+<script>
+  class ChersPreview extends HTMLElement {
+    connectedCallback() {
+      const launch = this.querySelector<HTMLAnchorElement>("[data-launch]");
+      launch?.addEventListener("click", (event) => {
+        // Preserve the link's normal open-in-new-tab behavior.
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+          return;
+        event.preventDefault();
+
+        const frame = document.createElement("iframe");
+        frame.className = "block size-full border-0";
+        frame.src = launch.href;
+        frame.title = "Play Chers chess";
+        frame.addEventListener("load", () => frame.focus(), { once: true });
+        launch.replaceWith(frame);
+      });
+    }
+  }
+
+  customElements.define("chers-preview", ChersPreview);
+</script>

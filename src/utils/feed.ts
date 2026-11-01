@@ -1,4 +1,7 @@
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import { experimental_AstroContainer as AstroContainer } from "astro/container";
+import { loadRenderers } from "astro:container";
+import { getContainerRenderer } from "@astrojs/mdx/container-renderer";
 import MarkdownIt from "markdown-it";
 import sanitizeHtml from "sanitize-html";
 import { article, project } from "@/links";
@@ -24,10 +27,10 @@ export type FeedItem = {
   content: string;
 };
 
-function toItem(
+async function toItem(
   entry: CollectionEntry<"blog"> | CollectionEntry<"projects">,
   link: string,
-): FeedItem | null {
+): Promise<FeedItem | null> {
   const pubDate =
     "pubDate" in entry.data
       ? (entry.data.updatedDate ?? entry.data.pubDate)
@@ -37,12 +40,24 @@ function toItem(
     return null;
   }
 
+  let html: string;
+  if (entry.filePath?.endsWith(".mdx")) {
+    // MDX imports and components need rendering before sanitizing for RSS.
+    const container = await AstroContainer.create({
+      renderers: await loadRenderers([getContainerRenderer()]),
+    });
+    const { Content } = await render(entry);
+    html = await container.renderToString(Content);
+  } else {
+    html = parser.render(entry.body ?? "");
+  }
+
   return {
     title: entry.data.title,
     description: entry.data.description,
     pubDate,
     link,
-    content: toXmlSafeHtml(sanitizeHtml(parser.render(entry.body ?? ""))),
+    content: toXmlSafeHtml(sanitizeHtml(html)),
   };
 }
 
@@ -53,14 +68,16 @@ export async function allFeedItems(): Promise<FeedItem[]> {
     getCollection("projects"),
   ]);
 
-  return [
-    ...posts.map((post) =>
-      toItem(post, article(post.id.replace(/\.md$/, ""))),
-    ),
-    ...projects.map((entry) =>
-      toItem(entry, project(entry.id.replace(/\.md$/, ""))),
-    ),
-  ]
+  return (
+    await Promise.all([
+      ...posts.map((post) =>
+        toItem(post, article(post.id.replace(/\.md$/, ""))),
+      ),
+      ...projects.map((entry) =>
+        toItem(entry, project(entry.id.replace(/\.md$/, ""))),
+      ),
+    ])
+  )
     .filter((item): item is FeedItem => item !== null)
     .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 }

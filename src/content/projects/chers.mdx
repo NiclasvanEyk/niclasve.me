@@ -6,6 +6,10 @@ github: https://github.com/NiclasvanEyk/chers
 website: https://chers.niclasve.me
 ---
 
+import ChersPreview from "@/components/ChersPreview.astro";
+
+<ChersPreview url={frontmatter.website} description={frontmatter.description} />
+
 This project primarily originated from the urge to play with technologies.
 I like to play chess from time to time, so why not recreate it from scratch?
 At first, it was an excuse to learn the Rust programming language.
