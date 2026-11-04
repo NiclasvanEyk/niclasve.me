@@ -9,38 +9,38 @@ interface Props {
 
 const { theme, size = "section" } = Astro.props;
 const { heading, href, section, transitionName }: SectionTheme = themes[theme];
-const Wrapper = size === "nav" ? "a" : "div";
+const Wrapper = size === "nav" ? "span" : "div";
 const Heading = size === "page" ? "h1" : size === "nav" ? "span" : "h2";
+const headingClasses = "section-heading font-black tracking-tight opacity-95";
+const isLinkedHeading = Boolean(href) && size === "section";
 ---
 
 <Wrapper
   data-section={section}
-  href={size === "nav" ? href : undefined}
   class:list={[
-    "group font-merriweather flex w-fit max-w-full items-center",
+    "font-merriweather flex w-fit max-w-full items-center",
     size === "page" ? "gap-3 text-2xl" : "gap-2 text-base",
   ]}
   transition:name={transitionName}
 >
   <GlyphBadge
     {theme}
-    label={size === "nav" ? undefined : `${heading} badge`}
+    label={`${heading} badge`}
     size={size === "page" ? "medium" : "small"}
   />
-  <Heading
-    class:list={[
-      "section-heading font-black tracking-tight opacity-95",
-      size === "nav" && "group-hover:underline",
-    ]}
-  >
-    {
-      href && size === "section" ? (
+  {
+    size === "nav" ? (
+      <a href={href} class="flex items-center hover:underline">
+        <Heading class={headingClasses}>{heading}</Heading>
+      </a>
+    ) : isLinkedHeading ? (
+      <Heading class={headingClasses}>
         <a href={href} class="text-inherit hover:underline">
           {heading}
         </a>
-      ) : (
-        heading
-      )
-    }
-  </Heading>
+      </Heading>
+    ) : (
+      <Heading class={headingClasses}>{heading}</Heading>
+    )
+  }
 </Wrapper>
