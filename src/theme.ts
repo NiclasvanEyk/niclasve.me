@@ -72,14 +72,14 @@ export const themes = {
     transitionName: "projects-landmark",
     favicon: "/favicon-projects.svg",
     light: {
-      ...accents(colors.green),
+      ...accents(colors.red),
       badgeBackground: colors.red[800],
       badgeForeground: colors.red[100],
       heading: colors.red[950],
       link: colors.red[600],
     },
     dark: {
-      ...accents(colors.green, true),
+      ...accents(colors.red, true),
       badgeBackground: colors.red[900],
       badgeForeground: colors.red[100],
       heading: colors.red[100],
