@@ -21,7 +21,7 @@
     "@fontsource-variable/merriweather": "^5.3.0",
     "@tailwindcss/typography": "^0.5.20",
     "@vercel/analytics": "^2.0.1",
-    "astro": "^7.4.4",
+    "astro": "^7.4.7",
     "astro-expressive-code": "^0.44.3",
     "date-fns": "^4.4.0",
     "esbuild": "^0.28.2",
